@@ -150,6 +150,23 @@ h1 span { color: var(--gold); }
 .priority-dot { border-radius: 50%; height: 6px; margin-left: auto; width: 6px; }
 .high-dot { background: var(--red); }.medium-dot { background: var(--gold); }.low-dot { background: var(--green); }
 .all-tasks-link { display: block; padding-top: 4px; }
+.monthly-panel { margin-top: 15px; }
+.month-controls { align-items: center; display: flex; gap: 13px; }
+.month-controls button { background: transparent; border: 1px solid var(--line); color: var(--navy); cursor: pointer; font-size: 15px; height: 26px; line-height: 20px; width: 26px; }
+.month-controls span { color: var(--muted); font-size: 10px; }
+.calendar { padding-top: 19px; }
+.calendar-weekdays, .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+.calendar-weekdays { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; padding-bottom: 9px; text-align: center; text-transform: uppercase; }
+.calendar-day { border-left: 1px solid var(--line); border-top: 1px solid var(--line); color: var(--ink); min-height: 66px; padding: 9px 10px; position: relative; }
+.calendar-day:nth-child(7n) { border-right: 1px solid var(--line); }
+.calendar-day:nth-last-child(-n+7) { border-bottom: 1px solid var(--line); }
+.muted-day { color: #c1c7c6; }
+.current-day { background: #f8f1df; color: var(--navy); }
+.current-day::after { background: var(--gold); border-radius: 50%; content: ""; height: 5px; position: absolute; right: 9px; top: 10px; width: 5px; }
+.calendar-day strong { display: block; font-size: 11px; font-weight: 600; }
+.calendar-day small { color: var(--gold); display: block; font-size: 9px; margin-top: 9px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.calendar-day .blue-label { color: var(--blue); }.calendar-day .red-label { color: var(--red); }
+.event-label::before { background: currentColor; border-radius: 50%; content: ""; display: inline-block; height: 4px; margin-right: 4px; vertical-align: 1px; width: 4px; }
 .courses-panel { margin-top: 15px; }
 .course-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); padding-top: 20px; }
 .course-card { border-top: 3px solid; padding: 15px 15px 13px; }
@@ -159,6 +176,20 @@ h1 span { color: var(--gold); }
 .course-card h3 { color: var(--navy); font-size: 14px; margin: 12px 0 4px; }
 .course-card p { color: var(--muted); font-size: 10px; margin-bottom: 14px; }
 .course-bar span { background: var(--navy); display: block; height: 100%; opacity: .75; }
+.statistics-panel { margin-top: 15px; }
+.statistics-grid { display: grid; gap: 10px; grid-template-columns: repeat(5, 1fr); padding-top: 20px; }
+.stat-card { border-left: 3px solid; min-height: 125px; padding: 14px 14px 11px; position: relative; }
+.study-stat { background: #f7f3e8; border-color: var(--gold); }.fitness-stat { background: #f1f6f3; border-color: var(--green); }.class-stat { background: #f1f5f7; border-color: var(--blue); }.assignment-stat { background: #f9f2f0; border-color: var(--red); }.deadline-stat { background: #f3f2f6; border-color: #8b7a99; }
+.stat-icon { color: var(--muted); display: block; font-size: 9px; font-weight: 700; letter-spacing: .08em; margin-bottom: 14px; }
+.stat-card strong { color: var(--navy); font-family: "Playfair Display", serif; font-size: 30px; line-height: 1; }
+.stat-unit { color: var(--muted); font-size: 9px; margin-left: 3px; }
+.stat-card p { color: var(--muted); font-size: 10px; margin: 12px 0 0; }
+.time-balance { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 17px; }
+.balance-heading { align-items: center; display: flex; justify-content: space-between; }
+.balance-heading strong { color: var(--navy); font-size: 11px; font-weight: 600; }.balance-heading span { color: var(--muted); font-size: 10px; }
+.balance-bar { display: flex; height: 8px; margin: 12px 0 9px; overflow: hidden; }
+.balance-bar span { display: block; }.study-balance { background: var(--gold); width: 53%; }.class-balance { background: var(--blue); width: 33%; }.fitness-balance { background: var(--green); width: 14%; }.free-balance { background: #e7e8e4; width: 0; }
+.balance-legend { display: flex; gap: 18px; }.balance-legend span { color: var(--muted); font-size: 9px; }.balance-legend i { border-radius: 50%; display: inline-block; height: 6px; margin-right: 4px; width: 6px; }.study-dot { background: var(--gold); }.class-dot { background: var(--blue); }.fitness-dot { background: var(--green); }
 
 @media (max-width: 1050px) {
 	.main-content { padding: 0 28px 45px; }
@@ -191,7 +222,15 @@ h1 span { color: var(--gold); }
 	.workload-card { grid-column: auto; }
 	.overview-card { min-height: 0; }
 	.content-grid, .courses-panel { margin-top: 12px; }
+		.monthly-panel { margin-top: 12px; }
 	.course-grid { grid-template-columns: 1fr; }
-	.schedule-panel, .tasks-panel, .courses-panel { padding: 20px 17px; }
+	.schedule-panel, .tasks-panel, .courses-panel, .statistics-panel { padding: 20px 17px; }
+		.monthly-panel { padding: 20px 10px; }
+		.calendar-day { min-height: 58px; padding: 7px 5px; }
+		.calendar-day small { font-size: 8px; }
 	.event-duration { display: none !important; }
+	.statistics-grid { grid-template-columns: repeat(2, 1fr); }
+	.stat-card:last-child { grid-column: span 2; }
+	.balance-heading { align-items: flex-start; flex-direction: column; gap: 3px; }
+	.balance-legend { flex-wrap: wrap; gap: 8px 15px; }
 }

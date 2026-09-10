@@ -25,6 +25,7 @@
 				<a class="nav-link" href="#tasks"><span class="nav-icon">03</span>Tasks</a>
 				<a class="nav-link" href="#courses"><span class="nav-icon">04</span>Courses</a>
 				<a class="nav-link" href="#objectives"><span class="nav-icon">05</span>Objectives</a>
+				<a class="nav-link" href="#statistics"><span class="nav-icon">06</span>Statistics</a>
 			</nav>
 
 			<div class="sidebar-bottom">
@@ -114,7 +115,7 @@
 							<p class="section-kicker">Your day</p>
 							<h2>Schedule</h2>
 						</div>
-						<a class="text-link" href="#schedule">Week view <span>&#8594;</span></a>
+						<a class="text-link" href="#monthly-view">Month view <span>&#8594;</span></a>
 					</div>
 					<div class="schedule-list">
 						<div class="schedule-row">
@@ -190,6 +191,61 @@
 				</section>
 			</div>
 
+			<section class="panel monthly-panel" id="monthly-view">
+				<div class="panel-header">
+					<div>
+						<p class="section-kicker">Plan ahead</p>
+						<h2>September 2026</h2>
+					</div>
+					<div class="month-controls" aria-label="Month navigation">
+						<button type="button" aria-label="Previous month">&#8592;</button>
+						<span>September</span>
+						<button type="button" aria-label="Next month">&#8594;</button>
+					</div>
+				</div>
+				<div class="calendar" aria-label="September 2026 calendar">
+					<div class="calendar-weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+					<div class="calendar-days">
+						<span class="calendar-day muted-day">31</span>
+						<span class="calendar-day">1</span>
+						<span class="calendar-day">2</span>
+						<span class="calendar-day">3</span>
+						<span class="calendar-day">4</span>
+						<span class="calendar-day">5</span>
+						<span class="calendar-day">6</span>
+						<span class="calendar-day">7</span>
+						<span class="calendar-day">8</span>
+						<span class="calendar-day">9</span>
+						<span class="calendar-day current-day"><strong>10</strong><small class="event-label gold-label">Lab report</small></span>
+						<span class="calendar-day"><strong>11</strong><small class="event-label blue-label">Reading</small></span>
+						<span class="calendar-day"><strong>12</strong><small class="event-label red-label">Essay</small></span>
+						<span class="calendar-day">13</span>
+						<span class="calendar-day">14</span>
+						<span class="calendar-day">15</span>
+						<span class="calendar-day">16</span>
+						<span class="calendar-day">17</span>
+						<span class="calendar-day">18</span>
+						<span class="calendar-day">19</span>
+						<span class="calendar-day">20</span>
+						<span class="calendar-day">21</span>
+						<span class="calendar-day">22</span>
+						<span class="calendar-day">23</span>
+						<span class="calendar-day">24</span>
+						<span class="calendar-day">25</span>
+						<span class="calendar-day">26</span>
+						<span class="calendar-day">27</span>
+						<span class="calendar-day">28</span>
+						<span class="calendar-day">29</span>
+						<span class="calendar-day">30</span>
+						<span class="calendar-day muted-day">1</span>
+						<span class="calendar-day muted-day">2</span>
+						<span class="calendar-day muted-day">3</span>
+						<span class="calendar-day muted-day">4</span>
+						<span class="calendar-day muted-day">5</span>
+					</div>
+				</div>
+			</section>
+
 			<section class="panel courses-panel" id="courses">
 				<div class="panel-header">
 					<div>
@@ -202,6 +258,53 @@
 					<article class="course-card blue-course"><div class="course-card-top"><span class="course-mark blue-mark">EC</span><span class="course-code">ECON 204</span></div><h3>Microeconomics</h3><p>Next: Reading due tomorrow</p><div class="course-bar"><span style="width: 72%"></span></div></article>
 					<article class="course-card red-course"><div class="course-card-top"><span class="course-mark red-mark">HI</span><span class="course-code">HIST 110</span></div><h3>Modern History</h3><p>Next: Essay due Friday</p><div class="course-bar"><span style="width: 48%"></span></div></article>
 					<article class="course-card green-course"><div class="course-card-top"><span class="course-mark green-mark">MA</span><span class="course-code">MATH 221</span></div><h3>Calculus II</h3><p>Next: Quiz on Monday</p><div class="course-bar"><span style="width: 61%"></span></div></article>
+				</div>
+			</section>
+
+			<section class="panel statistics-panel" id="statistics">
+				<div class="panel-header">
+					<div>
+						<p class="section-kicker">Your week in numbers</p>
+						<h2>Weekly statistics</h2>
+					</div>
+					<a class="text-link" href="#statistics">This week <span>&#8594;</span></a>
+				</div>
+				<div class="statistics-grid">
+					<article class="stat-card study-stat">
+						<span class="stat-icon">ST</span>
+						<strong>14.5</strong>
+						<span class="stat-unit">hours</span>
+						<p>Studying</p>
+					</article>
+					<article class="stat-card fitness-stat">
+						<span class="stat-icon">GY</span>
+						<strong>4</strong>
+						<span class="stat-unit">hours</span>
+						<p>Gym &amp; sport</p>
+					</article>
+					<article class="stat-card class-stat">
+						<span class="stat-icon">CL</span>
+						<strong>9</strong>
+						<span class="stat-unit">classes</span>
+						<p>University time</p>
+					</article>
+					<article class="stat-card assignment-stat">
+						<span class="stat-icon">AS</span>
+						<strong>6</strong>
+						<span class="stat-unit">total</span>
+						<p>Assignments</p>
+					</article>
+					<article class="stat-card deadline-stat">
+						<span class="stat-icon">DL</span>
+						<strong>3</strong>
+						<span class="stat-unit">due soon</span>
+						<p>Deadlines</p>
+					</article>
+				</div>
+				<div class="time-balance">
+					<div class="balance-heading"><strong>How your planned time is split</strong><span>27.5 hrs planned</span></div>
+					<div class="balance-bar"><span class="study-balance"></span><span class="class-balance"></span><span class="fitness-balance"></span><span class="free-balance"></span></div>
+					<div class="balance-legend"><span><i class="study-dot"></i>Study 53%</span><span><i class="class-dot"></i>Classes 33%</span><span><i class="fitness-dot"></i>Fitness 14%</span></div>
 				</div>
 			</section>
 		</main>
