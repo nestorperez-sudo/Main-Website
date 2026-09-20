@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyFlow | Student Planner</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page">
@@ -26,8 +26,16 @@
 
         <main class="content" id="top">
             <header class="topbar">
-                <span>Tuesday, September 10, 2026</span>
-                <button>+ Add task</button>
+                <span class="breadcrumb">Tuesday, September 10, 2026</span>
+                <div class="topbar-actions">
+                    <form class="search" role="search">
+                        <label class="hidden-label" for="search">Search</label>
+                        <input id="search" name="search" type="search" placeholder="Search tasks, courses, notes">
+                        <button class="plain-button" type="submit">Search</button>
+                    </form>
+                    <button class="plain-button alerts" type="button">Alerts<span></span></button>
+                    <button class="primary-button" type="button"><span>+</span> Add task</button>
+                </div>
             </header>
 
             <section class="welcome">
