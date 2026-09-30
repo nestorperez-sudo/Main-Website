@@ -3,90 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyFlow | Student Planner</title>
+    <title>Study Flow</title>
+
+    <!-- Links -->
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="page">
-        <aside class="sidebar">
-            <a class="logo" href="#top"><span>S</span> StudyFlow</a>
-            <p class="menu-title">Workspace</p>
+        <aside id="sidebar" class="aside">
             <nav>
-                <a class="selected" href="#top">Today</a>
-                <a href="#schedule">Schedule</a>
-                <a href="#tasks">Tasks</a>
-                <a href="#courses">Courses</a>
-                <a href="#statistics">Statistics</a>
+                <div class="sidebar-logo">
+                    <a href="#top"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <div class="navigation active">
+                    <i class="fa-solid fa-clock"></i>
+                    <a href="#today"> <span>Today</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <a href="#schedule"><span>Schedule</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-list-check"></i>
+                    <a href="#tasks"><span>Tasks</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-book"></i>
+                    <a href="#courses"><span>Courses</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="#statistcs"><span>Statistics</span></a>
+                </div>
             </nav>
-            <div class="sidebar-footer">
-                <p><strong>AM</strong> Alex Morgan</p>
-                <small>Student account</small>
-            </div>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
         </aside>
-
-        <main class="content" id="top">
-            <header class="topbar">
-                <span class="breadcrumb">Tuesday, September 10, 2026</span>
-                <div class="topbar-actions">
-                    <form class="search" role="search">
-                        <label class="hidden-label" for="search">Search</label>
-                        <input id="search" name="search" type="search" placeholder="Search tasks, courses, notes">
-                        <button class="plain-button" type="submit">Search</button>
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form>
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses...">
+                        </div>
                     </form>
-                    <button class="plain-button alerts" type="button">Alerts<span></span></button>
-                    <button class="primary-button" type="button"><span>+</span> Add task</button>
+                    <a href="alert.index" class="alert-row">
+                        <span>Alerts</span>
+                        <span class="red-circle-alert" aria-label="New alerts"></span>
+                    </a>
+                    <button class="add-task-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="add-task">Add task</span>
+                    </button>
                 </div>
             </header>
-
-            <section class="welcome">
-                <h1>Hello, Alex<span>.</span></h1>
-                <div class="date"><b>10</b> SEP<br>2026</div>
-            </section>
-
-            <section>
-                <div class="section-heading">
-                    <h2>Coming up</h2>
-                    <span class="label">4 items to plan</span>
+            <main>
+                <div class="welcome-section">
+                    <h1>Hello, Alex<span class="dot" style="color: var(--gold);">.</span></h1>
+                    <div class="date-block">
+                        <div style="height: fit-content;">
+                            <span class="day-number">10</span>
+                            <span class="month">SEP</span>
+                        </div>
+                        <span class="year">2026</span>
+                    </div>
                 </div>
-                <div class="cards three-columns">
-                    <article class="card upcoming red-top">
-                        <div class="card-title"><b>Today · Tue, Sep 10</b><small>2 items</small></div>
-                    </article>
-                    <article class="card upcoming blue-top">
-                        <div class="card-title"><b>Tomorrow · Wed, Sep 11</b><small>2 items</small></div>
-                    </article>
-                    <article class="card exam">
-                        <div class="card-title"><b>Study reminder</b><small>Exam in 6 days</small></div>
-                        <h3>EX &nbsp; Calculus II midterm</h3>
-                        <p>Monday, September 16</p>
-                        <hr>
-                        <small>Start preparing this week</small>
-                    </article>
+                <div class="coming-up">
+                    <h1>Coming up</h1>
+                    <button class="items-plan">4 items to plan</button>
                 </div>
-            </section>
+                <section class="coming-up-dashboard">
+                    <article class="card">
+                        <div class="card-header">
+                            <span>Today · Tue, Sep 10</span>
+                            <span class="count">2 items</span>
+                        </div>
+                        
+                        <div class="card-body">
+                            <h3>EX Calculus II midterm</h3>
+                            <p>Monday, September 16</p>
+                        </div>
+                    </article>
 
-            <div class="cards two-columns">
-                <section class="panel" id="schedule">
-                    <div class="section-heading"><h2>Schedule</h2><a href="#calendar">Month view →</a></div>
+                    <article class="card">
+                        <div class="card-header">
+                            <span>Tomorrow · Wed, Sep 11</span>
+                            <span class="count">2 items</span>
+                        </div>
+
+                        <div class="card-body">
+                            <h3>EX Calculus II midterm</h3>
+                            <p>Monday, September 16</p>
+                        </div>
+                    </article>
+
+                    <article class="card study-reminder">
+                        <div class="card-header">
+                            <span style="color: var(--gold);">Study reminder</span>
+                            <span class="count">Exam in 6 days</span>
+                        </div>
+
+                        <div class="card-body">
+                            <h3>EX Calculus II midterm</h3>
+                            <p>Monday, September 16</p>
+                        </div>
+                    </article>
                 </section>
-                <section class="panel" id="tasks">
-                    <div class="section-heading"><h2>Priority tasks</h2><a href="#tasks">...</a></div>
+                <section class="general-info">
+                    <article class="card schedule">
+                        <div class="card-header">
+                            <span class="card-title">Schedule</span>
+                            <span class="count">2 items</span>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-header">
+                            <span class="card-title">Priority tasks</span>
+                            <span class="count">2 items</span>
+                        </div>
+                    </article>
+
+                    <article class="card calendar">
+                        <div class="card-header">
+                            <span class="card-title">September 2026</span>
+                            <span class="count">September</span>
+                        </div>
+                    </article>
+
+                    <article class="card courses">
+                        <div class="card-header">
+                            <span class="card-title">Your courses</span>
+                            <span class="count">Manage courses</span>
+                        </div>
+                    </article>
+
+                    <article class="card statistics">
+                        <div class="card-header">
+                            <span class="card-title">Weekly statistics</span>
+                            <span class="count">Manage weekly statistics</span>
+                        </div>
+                    </article>
                 </section>
-            </div>
-
-            <section class="panel" id="calendar">
-                <div class="section-heading"><h2>September 2026</h2><span>← &nbsp; September &nbsp; →</span></div>
-                <div class="weekdays"><b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b><b>Sat</b><b>Sun</b></div>
-            </section>
-
-            <section class="panel" id="courses">
-                <div class="section-heading"><h2>Your courses</h2><a href="#courses">Manage courses →</a></div>
-            </section>
-
-            <section class="panel" id="statistics">
-                <div class="section-heading"><h2>Weekly statistics</h2><span>This week →</span></div>
-            </section>
-        </main>
+            </main>
+        </div>
     </div>
 </body>
 </html>
