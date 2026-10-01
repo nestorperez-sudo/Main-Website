@@ -47,14 +47,14 @@ button {
     border: none;
     padding: 8px 17px;
     cursor: pointer;
-    transition: transfrom 0.4s ease;
+    transition: transform 0.25s ease;
     height: fit-content;
 
 }
 
 button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 12px 20px rgba(17, 43, 70, 0.18);
+    box-shadow: 0 12px 20px rgba(17, 43, 70, 0.1);
 }
 
 /* SIDEBAR */
@@ -392,8 +392,7 @@ main {
     position: absolute;
     left: 50%;
     top: 0;
-    transform: translate(-50%, -50%);
-    transform: scale(0.1);
+    transform: translate(-50%, -50%) scale(0.1);
     visibility: hidden;
     z-index: 9999;
     padding: 30px;
@@ -424,6 +423,8 @@ main {
     padding: 10px;
     border: 1px solid var(--line);
     font-family: "Poppins";
+    width: 100%;
+    min-width: 0;
 }
 
 .top-popup {
@@ -455,7 +456,7 @@ main {
 
 .additional-info-popup {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 5px;
 }
 
