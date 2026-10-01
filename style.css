@@ -47,7 +47,7 @@ button {
     border: none;
     padding: 8px 17px;
     cursor: pointer;
-    transition: transfrom 0.15s ease;
+    transition: transfrom 0.4s ease;
     height: fit-content;
 
 }
@@ -383,6 +383,104 @@ main {
     font-weight: 600;
 }
 
+/* POP UP */
+.add-popup {
+    width: clamp(300px, 40%, 400px);
+    height: auto;
+    background-color: var(--white);
+    border-top: 3px solid var(--gold);
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    transform: scale(0.1);
+    visibility: hidden;
+    z-index: 9999;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 20px rgba(17, 43, 70, 0.25);
+    transition: transform 0.4s, top 0.4s;
+    --space-between-elements: 10px;
+}
+
+.add-popup span {
+    font-size: .6rem;
+    color: var(--gray);
+}
+
+.add-popup p {
+    margin: 0;
+    padding: 0;
+}
+
+.add-popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-popup input, .add-popup select {
+    background-color: var(--cream);
+    padding: 10px;
+    border: 1px solid var(--line);
+    font-family: "Poppins";
+}
+
+.top-popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+}
+
+.top-popup h1 {
+    margin-bottom: 0;
+}
+
+.form-popup label {
+    margin-bottom: 3px;
+}
+
+.types-task {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.additional-info-popup div {
+    display: flex;
+    flex-direction: column;
+}
+
+.additional-info-popup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.popup-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.x-popup {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.add-popup.open {
+    transform: translate(-50%, -50%) scale(1);
+    visibility: visible;
+    top: 50%;
+}
+
+.reset-btn {
+    background-color: transparent;
+    color: var(--navy);
+    border: 1px solid var(--navy);
+}
 
 /* RESPONSIVE */
 @media(max-width: 856px) {
