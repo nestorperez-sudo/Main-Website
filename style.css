@@ -404,11 +404,9 @@ main {
     --space-between-elements: 10px;
 }
 
-input[type="radio"] {
-    appearance: none;
-    background-color: transparent;
-    color: var(--navy);
-    border-radius: 1px solid var(--navy);
+.add-popup span {
+    font-size: .6rem;
+    color: var(--gray);
 }
 
 .add-popup p {
