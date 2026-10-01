@@ -180,6 +180,7 @@ nav {
     pointer-events: none;
 }
 
+
 #sidebar.collapsed .sidebar-toggle i {
     rotate: 180deg;
 }
@@ -385,7 +386,7 @@ main {
 
 /* POP UP */
 .add-popup {
-    width: clamp(300px, 40%, 400px);
+    width: min(400px, calc(100% - 32px));
     height: auto;
     background-color: var(--white);
     border-top: 3px solid var(--gold);
