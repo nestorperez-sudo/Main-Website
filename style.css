@@ -1,18 +1,27 @@
 :root {
     --navy: #112b46;
+    --navy-soft: #1d3d5e;
     --cream: #f7f5ef;
     --white: #ffffff;
     --gold: #c7a35a;
+    --gold-deep: #8a6a22;
     --text: #172b3d;
-    --gray: #71808c;
+    --gray: #5d6c78;
     --line: #e5e8e7;
+    --line-strong: #cfd5d3;
     --red: #c9776a;
     --blue: #527b9e;
     --green: #84b9a0;
+    --violet: #8f7bb3;
+    --red-soft: #f7e3df;
+    --blue-soft: #e9f0f7;
+    --green-soft: #edf6f1;
+    --violet-soft: #efeaf8;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0 ;
 }
 
 html {
@@ -33,6 +42,11 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
 }
 
 .page {
@@ -49,12 +63,14 @@ button {
     cursor: pointer;
     transition: transform 0.25s ease;
     height: fit-content;
+    font-weight: 600;
 
 }
 
 button:hover {
     transform: translateY(-1px);
     box-shadow: 0 12px 20px rgba(17, 43, 70, 0.1);
+    filter: brightness(93%);
 }
 
 /* SIDEBAR */
@@ -148,6 +164,7 @@ nav {
     align-items: center;
     gap: 9px;
     cursor: pointer;
+    font-size: .8rem;
 }
 
 .navigation > i {
@@ -242,6 +259,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 25px;
+    border-bottom: 1px solid var(--line);
 }
 
 .search-bar {
@@ -293,11 +311,11 @@ header {
 
 .red-circle-alert {
     position: absolute;
-    top: -3px;
-    right: -3px;
+    top: -5px;
+    right: -9px;
     display: inline-block;
-    height: 7px;
-    width: 7px;
+    height: 10px;
+    width: 10px;
     border-radius: 50%;
     background-color: var(--red);
 }
@@ -328,19 +346,61 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .items-plan {
     background-color: var(--green);
     color: var(--text);
     font-size: 10px;
-    font-weight: 600;
 }
+
+/* GENERALISED TIME SLOTS AND BODY */
+.card-body-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.card-slot-time {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 10px;
+}
+
+.golden-description {
+    color: var(--gold-deep);
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+    height: 10px;
+    min-width: 100%;
+    background-color: var(--gray);
+}
+
+/* STUDY REMINDER */
+.card-body-reminder {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.card-body-reminder button {
+    width: 35%;
+}
+
 
 /* COMING UP DASHOBARD*/
 .coming-up-dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
 
@@ -357,8 +417,17 @@ main {
 .card-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--line);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.count {
+    color: var(--gray);
+    font-weight: 400;
+    font-size: .85rem;
 }
 
 .study-reminder {
@@ -371,18 +440,32 @@ main {
 .general-info {
     margin-top: 25px;
     display: grid;
-    grid-template-columns: 1.7fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
 }
 
-.calendar, .statistics, .courses {
+.schedule {
+    grid-column: 1/5;
+}
+
+.priority {
+    grid-column: 5/-1;
+}
+
+.courses {
     grid-column: 1/-1;
 }
 
-.card-title {
-    font-size: 1.2rem;
-    font-weight: 600;
+.calendar-card-title {
+    grid-column: 1/4;
 }
+
+.statistics {
+    grid-column: 4/-1;
+}
+
+/* CALENDAR */
+
 
 /* POP UP */
 .add-popup {
