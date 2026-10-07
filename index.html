@@ -59,7 +59,7 @@
                         </div>
                     </form>
                     <a href="alert.index" class="alert-row">
-                        <span>Alerts</span>
+                        <i class="fa-regular fa-bell"></i>
                         <span class="red-circle-alert" aria-label="New alerts"></span>
                     </a>
                     <button class="add-task-btn" onclick="openPopup()">
@@ -176,6 +176,7 @@
                                     <li>M</li>
                                     <li>T</li>
                                     <li>W</li>
+                                    <li>T</li>
                                     <li>F</li>
                                     <li>S</li>
                                     <li>S</li>
@@ -195,7 +196,7 @@
                                     <li>9</li>
                                     <li>10</li>
                                     <li>11</li>
-                                    <li>12</li>
+                                    <li class="importantDate">12</li>
                                     <li>13</li>
                                     <li>14</li>
                                     <li>15</li>
@@ -223,17 +224,103 @@
                     <article class="card statistics">
                         <div class="card-header">
                             <span class="card-title">Weekly statistics</span>
-                            <span class="golden-description">Manage weekly statistics</span>
+                            <a class="golden-description">Full statistics</a>
                         </div>
-                    </article>
-
-                    <article class="card courses">
-                        <div class="card-header">
-                            <span class="card-title">Your courses</span>
-                            <span class="golden-description">Manage courses</span>
+                        <div class="card-body">
+                            <h1 style="margin-bottom: 5px;">9h <span style="font-size: .85rem; color: var(--gray); font-weight: 500;">studied of your 15h goal</span></h1>
+                            <div class="progress-bar"><div style="background-color: var(--gold); width: 60%; height: 100%;"></div></div>
+                            <div class="chart">
+                                <div class="bar" style="--value: 80">
+                                    <span>Mon</span>
+                                </div>
+                                <div class="bar" style="--value: 55">
+                                    <span>Tue</span>
+                                </div>
+                                <div class="bar" style="--value: 90">
+                                    <span>Wed</span>
+                                </div>
+                                <div class="bar" style="--value: 40">
+                                    <span>Thu</span>
+                                </div>
+                                <div class="bar bar-active" style="--value: 85">
+                                    <span>Fri</span>
+                                </div>
+                                <div class="bar" style="--value: 10">
+                                    <span>Sat</span>
+                                </div>
+                                <div class="bar" style="--value: 100">
+                                    <span>Sun</span>
+                                </div>
+                            </div>
                         </div>
                     </article>
                 </section>
+                <div class="card-header courses-header">
+                    <span class="card-title">Your courses</span>
+                    <a class="golden-description">Manage courses</a>
+                </div>
+                <div class="courses">
+                    <article class="card course">
+                        <span>MAT-201</span>
+                        <h1 class="card-title">Calculus II</h1>
+                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
+                        <div class="course-grid">
+                            <div>
+                                <span>Current Grade</span>
+                                <h3>84%</h3>
+                            </div>
+                            <div>
+                                <span>Next deadline</span>
+                                <h3>Mon, 5 oct</h3>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card course">
+                        <span>MAT-201</span>
+                        <h1 class="card-title">Calculus II</h1>
+                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
+                        <div class="course-grid">
+                            <div>
+                                <span>Current Grade</span>
+                                <h3>84%</h3>
+                            </div>
+                            <div>
+                                <span>Next deadline</span>
+                                <h3>Mon, 5 oct</h3>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card course">
+                        <span>MAT-201</span>
+                        <h1 class="card-title">Calculus II</h1>
+                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
+                        <div class="course-grid">
+                            <div>
+                                <span>Current Grade</span>
+                                <h3>84%</h3>
+                            </div>
+                            <div>
+                                <span>Next deadline</span>
+                                <h3>Mon, 5 oct</h3>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card course">
+                        <span>MAT-201</span>
+                        <h1 class="card-title">Calculus II</h1>
+                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
+                        <div class="course-grid">
+                            <div>
+                                <span>Current Grade</span>
+                                <h3>84%</h3>
+                            </div>
+                            <div>
+                                <span>Next deadline</span>
+                                <h3>Mon, 5 oct</h3>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </main>
         </div>
     </div>
