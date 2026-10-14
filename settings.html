@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="settings.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav>
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <div class="navigation">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <a href="index.html"><span>Today</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <a href="index.html"><span>Schedule</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <a href="index.html"><span>Tasks</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <a href="courses.html"><span>Courses</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <a href="statistics.html"><span>Statistics</span></a>
+                </div>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings" aria-current="page">AL</a>
+                </div>
+            </header>
+
+            <main class="settings-main">
+                <div class="settings-heading">
+                    <h1>Settings</h1>
+                    <p>Manage your profile, goals and notifications.</p>
+                </div>
+
+                <div class="settings-layout">
+                    <nav class="settings-nav" aria-label="Settings sections">
+                        <a class="is-active" href="#profile">Profile</a>
+                        <a href="#preferences">Preferences</a>
+                        <a href="#goals">Study goals</a>
+                        <a href="#notifications">Notifications</a>
+                        <a href="#account">Account</a>
+                    </nav>
+
+                    <form class="settings-form">
+                        <section class="card settings-section" id="profile">
+                            <div class="card-header"><h2 class="settings-section-title">Profile</h2></div>
+                            <div class="settings-profile-row">
+                                <span class="settings-avatar" aria-hidden="true">AL</span>
+                                <div>
+                                    <label class="settings-photo-button" for="profile-photo">Change photo</label>
+                                    <input class="settings-file-input" id="profile-photo" type="file" accept="image/png,image/jpeg">
+                                    <p class="settings-hint">JPG or PNG, up to 2 MB.</p>
+                                </div>
+                            </div>
+                            <div class="settings-field-grid">
+                                <div class="settings-field">
+                                    <label for="full-name">Full name</label>
+                                    <input id="full-name" name="name" type="text" value="Alex Lopez" autocomplete="name">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="email">Email</label>
+                                    <input id="email" name="email" type="email" value="alex@example.com" autocomplete="email">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="university">University</label>
+                                    <input id="university" name="university" type="text" placeholder="Your university" autocomplete="organization">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="degree">Degree and year</label>
+                                    <input id="degree" name="degree" type="text" placeholder="e.g. Economics, year 2">
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="card settings-section" id="preferences">
+                            <div class="card-header"><h2 class="settings-section-title">Preferences</h2></div>
+                            <div class="settings-field-grid">
+                                <div class="settings-field">
+                                    <label for="language">Language</label>
+                                    <select id="language" name="language"><option>English</option><option>Español</option></select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="week-start">Week starts on</label>
+                                    <select id="week-start" name="week-start"><option>Monday</option><option>Sunday</option></select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="time-format">Time format</label>
+                                    <select id="time-format" name="time-format"><option>24-hour</option><option>12-hour</option></select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="time-zone">Time zone</label>
+                                    <select id="time-zone" name="time-zone"><option>Madrid (CET)</option><option>London (GMT)</option></select>
+                                </div>
+                                <fieldset class="settings-theme">
+                                    <legend>Theme</legend>
+                                    <div class="settings-theme-options">
+                                        <label><input type="radio" name="theme" value="light" checked><span>Light</span></label>
+                                        <label><input type="radio" name="theme" value="dark"><span>Dark</span></label>
+                                        <label><input type="radio" name="theme" value="system"><span>Match my device</span></label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </section>
+
+                        <section class="card settings-section" id="goals">
+                            <div class="card-header"><h2 class="settings-section-title">Study goals</h2></div>
+                            <div class="settings-field-grid">
+                                <div class="settings-field">
+                                    <label for="weekly-goal">Weekly study goal (hours)</label>
+                                    <input id="weekly-goal" name="weekly-goal" type="number" value="15" min="1" max="80">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="daily-goal">Daily focus goal (hours)</label>
+                                    <input id="daily-goal" name="daily-goal" type="number" value="3" min="1" max="12">
+                                </div>
+                            </div>
+                            <p class="settings-hint settings-goal-hint">Goals appear on your dashboard and in your statistics.</p>
+                        </section>
+
+                        <section class="card settings-section" id="notifications">
+                            <div class="card-header"><h2 class="settings-section-title">Notifications</h2></div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <label for="deadline-reminders">Deadline reminders</label>
+                                    <small>Get an alert before tasks are due, using the reminder you set.</small>
+                                </div>
+                                <label class="settings-switch" for="deadline-reminders"><input id="deadline-reminders" type="checkbox" checked><span aria-hidden="true"></span></label>
+                            </div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <label for="exam-countdown">Exam countdown</label>
+                                    <small>Remind me to plan study sessions as exams get closer.</small>
+                                </div>
+                                <label class="settings-switch" for="exam-countdown"><input id="exam-countdown" type="checkbox" checked><span aria-hidden="true"></span></label>
+                            </div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <label for="daily-summary">Daily summary email</label>
+                                    <small>Your plan for the day, sent at 7:30.</small>
+                                </div>
+                                <label class="settings-switch" for="daily-summary"><input id="daily-summary" type="checkbox"><span aria-hidden="true"></span></label>
+                            </div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <label for="weekly-report">Weekly report</label>
+                                    <small>A summary of your study time and grades every Monday.</small>
+                                </div>
+                                <label class="settings-switch" for="weekly-report"><input id="weekly-report" type="checkbox" checked><span aria-hidden="true"></span></label>
+                            </div>
+                        </section>
+
+                        <section class="card settings-section" id="account">
+                            <div class="card-header"><h2 class="settings-section-title">Account</h2></div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <strong>Password</strong>
+                                    <small>Last changed 3 months ago.</small>
+                                </div>
+                                <button type="button" class="settings-secondary-button">Change password</button>
+                            </div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <strong>Export your data</strong>
+                                    <small>Download your tasks, courses and statistics as a file.</small>
+                                </div>
+                                <button type="button" class="settings-secondary-button">Export</button>
+                            </div>
+                            <div class="settings-option-row">
+                                <div class="settings-option-description">
+                                    <strong>Log out</strong>
+                                    <small>You will need to sign in again on this device.</small>
+                                </div>
+                                <a class="settings-secondary-button" href="login.html">Log out</a>
+                            </div>
+                        </section>
+
+                        <section class="card settings-section settings-danger-section">
+                            <div class="card-header"><h2 class="settings-section-title">Delete account</h2></div>
+                            <div class="settings-option-row">
+                                <p>This permanently removes your account and all your data. You cannot undo this.</p>
+                                <button type="button" class="settings-delete-button">Delete account</button>
+                            </div>
+                        </section>
+
+                        <div class="settings-save-row">
+                            <p>Settings are a frontend preview and are not saved yet.</p>
+                            <div>
+                                <button type="reset" class="settings-secondary-button">Discard changes</button>
+                                <button type="button" class="settings-save-button">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

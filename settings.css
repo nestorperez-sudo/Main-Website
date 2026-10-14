@@ -1,0 +1,427 @@
+/* SETTINGS PAGE */
+
+.profile-picture {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    text-decoration: none;
+}
+
+.profile-picture:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+}
+
+.settings-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settings-heading h1 {
+    font-size: 2rem;
+}
+
+.settings-heading p {
+    margin-top: 5px;
+    color: var(--gray);
+}
+
+.settings-layout {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+}
+
+.settings-nav {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0;
+}
+
+.settings-nav a {
+    padding: 9px 12px;
+    border-left: 2px solid transparent;
+    color: var(--gray);
+}
+
+.settings-nav a:hover,
+.settings-nav a.is-active {
+    border-left-color: var(--gold);
+    background-color: rgba(17, 43, 70, 0.04);
+    color: var(--text);
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.settings-section {
+    scroll-margin-top: 20px;
+}
+
+.settings-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.settings-profile-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+}
+
+.settings-avatar {
+    display: grid;
+    flex: 0 0 56px;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    color: var(--navy);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.settings-photo-button,
+.settings-secondary-button,
+.settings-delete-button,
+.settings-save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 6px 12px;
+    border: 1px solid var(--navy);
+    background-color: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
+
+.settings-photo-button:hover,
+.settings-secondary-button:hover {
+    background-color: rgba(17, 43, 70, 0.06);
+}
+
+.settings-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.settings-file-input:focus-visible + .settings-hint {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.settings-hint {
+    color: var(--gray);
+    font-size: .75rem;
+}
+
+.settings-photo-button + .settings-file-input + .settings-hint {
+    margin-top: 4px;
+}
+
+.settings-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.settings-field label,
+.settings-theme legend {
+    font-weight: 500;
+}
+
+.settings-field input,
+.settings-field select {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--line);
+    background-color: var(--cream);
+    color: var(--text);
+    font: inherit;
+}
+
+.settings-field input:focus,
+.settings-field select:focus {
+    border-color: var(--gold);
+    outline: 1px solid var(--gold);
+}
+
+.settings-theme {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.settings-theme legend {
+    margin-bottom: 6px;
+    padding: 0;
+}
+
+.settings-theme-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.settings-theme-options label {
+    position: relative;
+    cursor: pointer;
+}
+
+.settings-theme-options input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.settings-theme-options span {
+    display: block;
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    background-color: var(--white);
+}
+
+.settings-theme-options input:checked + span {
+    border-color: var(--navy);
+    background-color: var(--navy);
+    color: var(--cream);
+}
+
+.settings-theme-options input:focus-visible + span {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.settings-goal-hint {
+    margin-top: 10px;
+}
+
+.settings-option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.settings-option-row:last-child {
+    border-bottom: 0;
+}
+
+.settings-option-description {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.settings-option-description label,
+.settings-option-description strong {
+    font-weight: 500;
+}
+
+.settings-option-description small {
+    color: var(--gray);
+    font-size: .75rem;
+}
+
+.settings-switch {
+    position: relative;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.settings-switch input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.settings-switch span {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--line-strong);
+    background-color: var(--gray-soft);
+    transition: background-color .2s ease, border-color .2s ease;
+    pointer-events: none;
+}
+
+.settings-switch span::before {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    background-color: var(--white);
+    content: "";
+    transition: transform .2s ease;
+}
+
+.settings-switch input:checked + span {
+    border-color: var(--navy);
+    background-color: var(--navy);
+}
+
+.settings-switch input:checked + span::before {
+    transform: translateX(18px);
+}
+
+.settings-switch input:focus-visible + span {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.settings-danger-section {
+    border: 1px solid var(--red);
+}
+
+.settings-delete-button {
+    flex: 0 0 auto;
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.settings-save-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 8px;
+}
+
+.settings-save-row p {
+    color: var(--gray);
+    font-size: .75rem;
+}
+
+.settings-save-row > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.settings-save-button {
+    border-color: var(--navy);
+    background-color: var(--navy);
+    color: var(--cream);
+}
+
+.settings-save-button:hover {
+    background-color: var(--navy-soft);
+}
+
+.settings-photo-button:focus-visible,
+.settings-secondary-button:focus-visible,
+.settings-delete-button:focus-visible,
+.settings-save-button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+@media (max-width: 856px) {
+    .settings-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .settings-nav {
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+        width: 100%;
+        min-width: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .settings-nav a {
+        flex: 0 0 auto;
+        border-left: 0;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+    }
+
+    .settings-nav a:hover,
+    .settings-nav a.is-active {
+        border-bottom-color: var(--gold);
+    }
+}
+
+@media (max-width: 462px) {
+    .settings-main {
+        gap: 14px;
+    }
+
+    .settings-heading h1 {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+    }
+
+    .settings-field-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .settings-theme {
+        grid-column: auto;
+    }
+
+    .settings-option-row {
+        align-items: flex-start;
+    }
+
+    .settings-danger-section .settings-option-row {
+        flex-direction: column;
+    }
+
+    .settings-save-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .settings-save-row > div {
+        justify-content: flex-end;
+    }
+}

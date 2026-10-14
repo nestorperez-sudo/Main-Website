@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="courses.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav>
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <div class="navigation">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <a href="index.html"><span>Today</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <a href="index.html"><span>Schedule</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <a href="index.html"><span>Tasks</span></a>
+                </div>
+                <div class="navigation active">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <a href="courses.html" aria-current="page"><span>Courses</span></a>
+                </div>
+                <div class="navigation">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <a href="statistics.html"><span>Statistics</span></a>
+                </div>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
+                </div>
+            </header>
+        
+            <main class="statistics-main">
+                <div class="header-statistics">
+                    <div>
+                        <h1>Statistcs</h1>
+                        <p>See how your times goes and your grades are moving</p>
+                    </div>
+                    <div class="header-statistics-buttons">
+                        <button>Week</button>
+                        <button>Month</button>
+                        <button>Semester</button>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+</body>
+</html>
