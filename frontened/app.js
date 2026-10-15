@@ -29,3 +29,20 @@ function openPopup() {
 function closePopup() {
     popup.classList.remove("open")
 }
+
+const scheduleViewButtons = document.querySelectorAll("[data-schedule-view]");
+const scheduleViews = document.querySelectorAll(".agenda-view");
+
+scheduleViewButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const selectedView = button.dataset.scheduleView;
+
+        scheduleViewButtons.forEach((viewButton) => {
+            viewButton.setAttribute("aria-pressed", String(viewButton === button));
+        });
+
+        scheduleViews.forEach((view) => {
+            view.hidden = view.id !== `${selectedView}-agenda`;
+        });
+    });
+});
