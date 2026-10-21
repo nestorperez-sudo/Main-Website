@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav aria-label="Main navigation">
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <a class="navigation" href="index.html">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <span>Today</span>
+                </a>
+                <a class="navigation" href="schedule.html">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                </a>
+                <a class="navigation" href="tasks.html">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <span>Tasks</span>
+                </a>
+                <a class="navigation" href="courses.html">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <span>Courses</span>
+                </a>
+                <a class="navigation active" href="statistics.html" aria-current="page">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <span>Statistics</span>
+                </a>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
+                </div>
+            </header>
+
+            <main class="statistics-main">
+                <div class="statistics-heading">
+                    <div>
+                        <h1>Statistics</h1>
+                        <p>See where your time goes and how your grades are moving.</p>
+                    </div>
+                    <nav class="statistics-period" aria-label="Statistics period">
+                        <a class="is-active" href="statistics.html" aria-current="page">Week</a>
+                        <a href="statistics.html?p=month">Month</a>
+                        <a href="statistics.html?p=semester">Semester</a>
+                    </nav>
+                </div>
+
+                <section class="statistics-kpis" aria-label="Weekly overview">
+                    <article class="card stat-kpi">
+                        <div class="stat-kpi-top">
+                            <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
+                            <span class="stat-kpi-label">Studied this week</span>
+                        </div>
+                        <p class="stat-kpi-value">9 <span>hours</span></p>
+                        <p class="stat-kpi-change positive">1.5 h more than last week</p>
+                    </article>
+                    <article class="card stat-kpi">
+                        <div class="stat-kpi-top">
+                            <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
+                            <span class="stat-kpi-label">Tasks completed</span>
+                        </div>
+                        <p class="stat-kpi-value">7 <span>of 11</span></p>
+                        <p class="stat-kpi-change">64% complete this week</p>
+                    </article>
+                    <article class="card stat-kpi">
+                        <div class="stat-kpi-top">
+                            <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-fire"></i></span>
+                            <span class="stat-kpi-label">Study streak</span>
+                        </div>
+                        <p class="stat-kpi-value">5 <span>days</span></p>
+                        <p class="stat-kpi-change">Your best is 9 days</p>
+                    </article>
+                    <article class="card stat-kpi">
+                        <div class="stat-kpi-top">
+                            <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+                            <span class="stat-kpi-label">Average focus session</span>
+                        </div>
+                        <p class="stat-kpi-value">38 <span>min</span></p>
+                        <p class="stat-kpi-change negative">4 min shorter than last week</p>
+                    </article>
+                </section>
+
+                <section class="statistics-grid" aria-label="Study time">
+                    <article class="card statistics-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Study time per day</h2>
+                            <span class="count">This week</span>
+                        </div>
+                        <div class="weekly-goal">
+                            <div class="weekly-goal-label">
+                                <span>Weekly goal</span>
+                                <strong>9 <span>/ 15 h</span></strong>
+                            </div>
+                            <div class="goal-progress" role="img" aria-label="9 of 15 study hours completed, 60 percent">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="study-chart" role="img" aria-label="Study hours by day: Monday 2.5, Tuesday 3, Wednesday 1.5, Thursday 2, Friday 0, Saturday 0, Sunday 0 hours.">
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">2.5 h</span>
+                                <div class="study-chart-track">
+                                    <div class="study-chart-stack" style="height: 62.5%;">
+                                        <span class="course-calc" style="flex-grow: 1;"></span>
+                                        <span class="course-data" style="flex-grow: 1;"></span>
+                                        <span class="course-physics" style="flex-grow: .5;"></span>
+                                    </div>
+                                </div>
+                                <span class="study-chart-day">Mon</span>
+                            </div>
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">3 h</span>
+                                <div class="study-chart-track">
+                                    <div class="study-chart-stack" style="height: 75%;">
+                                        <span class="course-calc" style="flex-grow: 1;"></span>
+                                        <span class="course-data" style="flex-grow: .5;"></span>
+                                        <span class="course-physics" style="flex-grow: 1;"></span>
+                                        <span class="course-economics" style="flex-grow: .5;"></span>
+                                    </div>
+                                </div>
+                                <span class="study-chart-day">Tue</span>
+                            </div>
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">1.5 h</span>
+                                <div class="study-chart-track">
+                                    <div class="study-chart-stack" style="height: 37.5%;">
+                                        <span class="course-calc" style="flex-grow: .5;"></span>
+                                        <span class="course-data" style="flex-grow: .5;"></span>
+                                        <span class="course-economics" style="flex-grow: .5;"></span>
+                                    </div>
+                                </div>
+                                <span class="study-chart-day">Wed</span>
+                            </div>
+                            <div class="study-chart-column is-today">
+                                <span class="study-chart-value">2 h</span>
+                                <div class="study-chart-track">
+                                    <div class="study-chart-stack" style="height: 50%;">
+                                        <span class="course-physics" style="flex-grow: 1;"></span>
+                                        <span class="course-calc" style="flex-grow: 1;"></span>
+                                    </div>
+                                </div>
+                                <span class="study-chart-day">Thu</span>
+                            </div>
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">0 h</span>
+                                <div class="study-chart-track"></div>
+                                <span class="study-chart-day">Fri</span>
+                            </div>
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">0 h</span>
+                                <div class="study-chart-track"></div>
+                                <span class="study-chart-day">Sat</span>
+                            </div>
+                            <div class="study-chart-column">
+                                <span class="study-chart-value">0 h</span>
+                                <div class="study-chart-track"></div>
+                                <span class="study-chart-day">Sun</span>
+                            </div>
+                        </div>
+                        <ul class="statistics-legend" aria-label="Courses">
+                            <li><span class="legend-dot course-calc"></span>Calculus II</li>
+                            <li><span class="legend-dot course-data"></span>Data Structures</li>
+                            <li><span class="legend-dot course-physics"></span>Physics II</li>
+                            <li><span class="legend-dot course-economics"></span>Microeconomics</li>
+                        </ul>
+                    </article>
+
+                    <article class="card statistics-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Time by course</h2>
+                            <span class="count">9 hours total</span>
+                        </div>
+                        <div class="course-time-content">
+                            <div class="course-time-chart" role="img" aria-label="Study time by course: Calculus II 3.5 hours, Physics II 2.5 hours, Data Structures 2 hours, Microeconomics 1 hour.">
+                                <div class="course-time-chart-center">
+                                    <strong>9 h</strong>
+                                    <span>this week</span>
+                                </div>
+                            </div>
+                            <ul class="course-time-list">
+                                <li><span class="legend-dot course-calc"></span><span>Calculus II</span><strong>3.5 h</strong></li>
+                                <li><span class="legend-dot course-physics"></span><span>Physics II</span><strong>2.5 h</strong></li>
+                                <li><span class="legend-dot course-data"></span><span>Data Structures</span><strong>2 h</strong></li>
+                                <li><span class="legend-dot course-economics"></span><span>Microeconomics</span><strong>1 h</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="statistics-grid" aria-label="Grades and recommendations">
+                    <article class="card statistics-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Grade trend</h2>
+                            <span class="count">Last 6 weeks</span>
+                        </div>
+                        <svg class="grade-chart" viewBox="0 0 540 220" role="img" aria-label="Grade trends over six weeks. Calculus II rises from 78 to 86 percent; Data Structures stays around 90 to 94 percent; Physics II rises from 70 to 76 percent; Microeconomics rises from 82 to 86 percent.">
+                            <line class="grade-grid-line" x1="42" x2="520" y1="174" y2="174"></line>
+                            <line class="grade-grid-line" x1="42" x2="520" y1="138" y2="138"></line>
+                            <line class="grade-grid-line" x1="42" x2="520" y1="102" y2="102"></line>
+                            <line class="grade-grid-line" x1="42" x2="520" y1="66" y2="66"></line>
+                            <line class="grade-grid-line" x1="42" x2="520" y1="30" y2="30"></line>
+                            <text class="grade-axis" x="34" y="178" text-anchor="end">60</text>
+                            <text class="grade-axis" x="34" y="142" text-anchor="end">70</text>
+                            <text class="grade-axis" x="34" y="106" text-anchor="end">80</text>
+                            <text class="grade-axis" x="34" y="70" text-anchor="end">90</text>
+                            <text class="grade-axis" x="34" y="34" text-anchor="end">100</text>
+                            <text class="grade-axis" x="50" y="202" text-anchor="middle">Wk 1</text>
+                            <text class="grade-axis" x="140" y="202" text-anchor="middle">Wk 2</text>
+                            <text class="grade-axis" x="230" y="202" text-anchor="middle">Wk 3</text>
+                            <text class="grade-axis" x="320" y="202" text-anchor="middle">Wk 4</text>
+                            <text class="grade-axis" x="410" y="202" text-anchor="middle">Wk 5</text>
+                            <text class="grade-axis" x="500" y="202" text-anchor="middle">Wk 6</text>
+                            <polyline class="grade-series course-calc" points="50,107 140,100 230,93 320,96 410,86 500,79"></polyline>
+                            <polyline class="grade-series course-data" points="50,72 140,65 230,68 320,58 410,54 500,51"></polyline>
+                            <polyline class="grade-series course-physics" points="50,135 140,128 230,138 320,121 410,114 500,118"></polyline>
+                            <polyline class="grade-series course-economics" points="50,93 140,96 230,86 320,82 410,90 500,79"></polyline>
+                        </svg>
+                        <ul class="statistics-legend grade-legend" aria-label="Courses">
+                            <li><span class="legend-dot course-calc"></span>Calculus II</li>
+                            <li><span class="legend-dot course-data"></span>Data Structures</li>
+                            <li><span class="legend-dot course-physics"></span>Physics II</li>
+                            <li><span class="legend-dot course-economics"></span>Microeconomics</li>
+                        </ul>
+                    </article>
+
+                    <article class="card statistics-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Insights</h2>
+                        </div>
+                        <ul class="statistics-insights">
+                            <li>
+                                <i class="fa-regular fa-sun" aria-hidden="true"></i>
+                                <div>
+                                    <strong>You focus best from 9 to 11 am.</strong>
+                                    <p>Schedule your hardest subject in that window.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                                <div>
+                                    <strong>Physics II is your lowest grade.</strong>
+                                    <p>Add an extra study block before your next assessment.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-fire" aria-hidden="true"></i>
+                                <div>
+                                    <strong>Keep your 5-day streak going.</strong>
+                                    <p>Study for 30 minutes tomorrow to reach 6 days.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+
+                <article class="card statistics-card activity-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Study activity</h2>
+                        <span class="count">Last 12 weeks</span>
+                    </div>
+                    <div class="activity-heatmap" role="img" aria-label="Daily study activity over the last 12 weeks. Darker squares indicate more study time.">
+                        <span class="level-3"></span><span class="level-4"></span><span class="level-3"></span><span class="level-3"></span><span class="level-2"></span><span class="level-1"></span><span class="level-2"></span>
+                        <span class="level-3"></span><span class="level-4"></span><span class="level-3"></span><span class="level-3"></span><span class="level-3"></span><span></span><span class="level-2"></span>
+                        <span class="level-4"></span><span class="level-4"></span><span class="level-1"></span><span class="level-1"></span><span class="level-2"></span><span></span><span class="level-1"></span>
+                        <span class="level-3"></span><span class="level-4"></span><span class="level-2"></span><span class="level-3"></span><span class="level-3"></span><span></span><span class="level-3"></span>
+                        <span class="level-4"></span><span class="level-4"></span><span class="level-2"></span><span class="level-2"></span><span class="level-3"></span><span class="level-1"></span><span class="level-2"></span>
+                        <span class="level-3"></span><span class="level-3"></span><span class="level-2"></span><span class="level-2"></span><span class="level-4"></span><span></span><span class="level-1"></span>
+                        <span class="level-3"></span><span class="level-1"></span><span class="level-3"></span><span class="level-4"></span><span class="level-1"></span><span class="level-1"></span><span class="level-1"></span>
+                        <span class="level-2"></span><span class="level-4"></span><span class="level-3"></span><span class="level-1"></span><span class="level-4"></span><span class="level-2"></span><span class="level-2"></span>
+                        <span class="level-4"></span><span class="level-3"></span><span class="level-3"></span><span class="level-2"></span><span class="level-4"></span><span></span><span class="level-1"></span>
+                        <span class="level-2"></span><span class="level-2"></span><span class="level-2"></span><span class="level-4"></span><span class="level-1"></span><span></span><span class="level-1"></span>
+                        <span class="level-4"></span><span class="level-4"></span><span class="level-1"></span><span></span><span class="level-3"></span><span></span><span></span>
+                        <span class="level-4"></span><span class="level-4"></span><span class="level-3"></span><span class="level-3"></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="activity-legend" aria-hidden="true">
+                        <span>Less</span><i></i><i class="level-1"></i><i class="level-2"></i><i class="level-3"></i><i class="level-4"></i><span>More</span>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

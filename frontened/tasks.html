@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav aria-label="Main navigation">
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <a class="navigation" href="index.html">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <span>Today</span>
+                </a>
+                <a class="navigation" href="schedule.html">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                </a>
+                <a class="navigation active" href="tasks.html" aria-current="page">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <span>Tasks</span>
+                </a>
+                <a class="navigation" href="courses.html">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <span>Courses</span>
+                </a>
+                <a class="navigation" href="statistics.html">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <span>Statistics</span>
+                </a>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <button type="button" class="add-task-btn" onclick="openPopup()">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span class="add-task">Add task</span>
+                    </button>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
+                </div>
+            </header>
+
+            <main class="tasks-main">
+                <div class="tasks-heading">
+                    <h1>Tasks</h1>
+                    <p>A simple list of what’s coming up.</p>
+                </div>
+
+                <section class="card tasks-list-card" aria-labelledby="upcoming-tasks-title">
+                    <div class="card-header">
+                        <h2 class="card-title" id="upcoming-tasks-title">Upcoming</h2>
+                        <span class="count">4 tasks</span>
+                    </div>
+                    <ul class="task-list">
+                        <li class="task-row">
+                            <input class="task-checkbox" type="checkbox" aria-label="Mark Physics II lab report as complete">
+                            <span class="task-course-mark physics-mark" aria-hidden="true"></span>
+                            <div class="task-details">
+                                <h3>Physics II lab report</h3>
+                                <p>Physics II <span aria-hidden="true">·</span> Assignment</p>
+                            </div>
+                            <time class="task-due task-due-today">Due today</time>
+                        </li>
+                        <li class="task-row">
+                            <input class="task-checkbox" type="checkbox" aria-label="Mark Microeconomics quiz as complete">
+                            <span class="task-course-mark economics-mark" aria-hidden="true"></span>
+                            <div class="task-details">
+                                <h3>Microeconomics quiz</h3>
+                                <p>Microeconomics <span aria-hidden="true">·</span> Quiz</p>
+                            </div>
+                            <time class="task-due" datetime="2026-10-23">Fri, 23 Oct</time>
+                        </li>
+                        <li class="task-row">
+                            <input class="task-checkbox" type="checkbox" aria-label="Mark Calculus II problem set as complete">
+                            <span class="task-course-mark calculus-mark" aria-hidden="true"></span>
+                            <div class="task-details">
+                                <h3>Calculus II problem set</h3>
+                                <p>Calculus II <span aria-hidden="true">·</span> Assignment</p>
+                            </div>
+                            <time class="task-due" datetime="2026-10-26">Mon, 26 Oct</time>
+                        </li>
+                        <li class="task-row">
+                            <input class="task-checkbox" type="checkbox" aria-label="Mark Data Structures milestone 1 as complete">
+                            <span class="task-course-mark data-mark" aria-hidden="true"></span>
+                            <div class="task-details">
+                                <h3>Data Structures milestone 1</h3>
+                                <p>Data Structures <span aria-hidden="true">·</span> Project</p>
+                            </div>
+                            <time class="task-due" datetime="2026-10-28">Wed, 28 Oct</time>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="card tasks-list-card completed-tasks" aria-labelledby="completed-tasks-title">
+                    <div class="card-header">
+                        <h2 class="card-title" id="completed-tasks-title">Completed</h2>
+                        <span class="count">2 tasks</span>
+                    </div>
+                    <ul class="task-list">
+                        <li class="task-row">
+                            <span class="task-complete-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                            <div class="task-details">
+                                <h3>Review lecture notes</h3>
+                                <p>Calculus II <span aria-hidden="true">·</span> Study</p>
+                            </div>
+                            <button class="task-remove-button" type="button" aria-label="Remove Review lecture notes from completed tasks">×</button>
+                        </li>
+                        <li class="task-row">
+                            <span class="task-complete-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                            <div class="task-details">
+                                <h3>Read chapter 3</h3>
+                                <p>Microeconomics <span aria-hidden="true">·</span> Reading</p>
+                            </div>
+                            <button class="task-remove-button" type="button" aria-label="Remove Read chapter 3 from completed tasks">×</button>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+    <div class="add-popup" id="popup">
+        <div class="top-popup">
+            <h1>Add a task</h1>
+            <button type="button" class="task-popup-close" onclick="closePopup()" aria-label="Close add task">
+                <i class="fa-solid fa-xmark x-popup" aria-hidden="true"></i>
+            </button>
+        </div>
+        <p style="margin-bottom: 8px;">Add it to your plan so it shows up</p>
+        <form class="form-popup" action="">
+            <label for="">Type</label>
+            <div class="types-task">
+                <button type="button">Assignment</button>
+                <button type="button">Exam</button>
+                <button type="button">Project</button>
+                <button type="button">Personal</button>
+            </div>
+
+            <div class="additional-info-popup">
+                <div class="popup-course">
+                    <label for="">Course</label>
+                    <select name="" id="" required>
+                        <option value="Math">Math</option>
+                        <option value="Science" selected>Science</option>
+                        <option value="Data">Data</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Assignment</label>
+                    <input type="text" placeholder="Test" required>
+                </div>
+                <div>
+                    <label for="">Due date</label>
+                    <input type="date" required>
+                </div>
+                <div>
+                    <label for="">Time <span>(optional)</span></label>
+                    <input type="time">
+                </div>
+            </div>
+
+            <label for="" style="margin-top: 8px;">Priority</label>
+            <div class="types-task">
+                <button type="button" style="background-color: var(--green);">Low</button>
+                <button type="button">Medium</button>
+                <button type="button" style="background-color: var(--gold);">High</button>
+            </div>
+
+            <label for="">Remind me</label>
+            <select name="" id="" required aria-placeholder="1-day">
+                <option value="no-reminder">No reminder</option>
+                <option value="1-day">1 day before</option>
+                <option value="3-day" selected>3 days before</option>
+                <option value="1-week">1 week before</option>
+            </select>
+
+            <label for="" style="margin-top: 8px;">Short description <span>(Optional)</span></label>
+            <input type="text">
+
+            <div class="popup-btns" style="margin-top: 8px;">
+                <button type="reset" class="reset-btn">Reset</button>
+                <button onclick="closePopup()" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

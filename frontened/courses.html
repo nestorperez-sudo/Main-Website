@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav>
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <a class="navigation" href="index.html">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <span>Today</span>
+                </a>
+                <a class="navigation" href="schedule.html">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                </a>
+                <a class="navigation" href="tasks.html">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <span>Tasks</span>
+                </a>
+                <a class="navigation active" href="courses.html" aria-current="page">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <span>Courses</span>
+                </a>
+                <a class="navigation" href="statistics.html">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <span>Statistics</span>
+                </a>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 21 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
+                </div>
+            </header>
+
+            <main class="courses-main">
+                <div class="courses-heading">
+                    <div>
+                        <h1>Courses</h1>
+                        <p>Fall 2026 semester, 4 courses.</p>
+                    </div>
+                    <div class="courses-actions">
+                        <nav class="semester-tabs" aria-label="Course term">
+                            <a class="is-active" href="#courses" aria-current="page">Fall 2026</a>
+                            <a href="#archived-courses">Archived</a>
+                        </nav>
+                        <a class="courses-add-button" href="#add-course"><i class="fa-solid fa-plus" aria-hidden="true"></i>Add course</a>
+                    </div>
+                </div>
+
+                <section class="course-grid" id="courses" aria-label="Fall 2026 courses">
+                    <article class="card course-card course-calculus">
+                        <div class="course-card-top">
+                            <span class="course-code">MAT-201</span>
+                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-calculator"></i></span>
+                        </div>
+                        <h2>Calculus II</h2>
+                        <p class="course-instructor">Prof. Elena Marín</p>
+                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Mon and Wed, 9:00 to 11:00</p>
+                        <dl class="course-details">
+                            <div><dt>Current grade</dt><dd>84%</dd></div>
+                            <div><dt>Open tasks</dt><dd>3</dd></div>
+                            <div><dt>Next deadline</dt><dd>Problem set 4, 5 Oct</dd></div>
+                            <div><dt>Studied this week</dt><dd>3.5 h</dd></div>
+                        </dl>
+                        <div class="course-progress" role="img" aria-label="Current grade 84 percent"><span style="width: 84%;"></span></div>
+                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                    </article>
+
+                    <article class="card course-card course-data">
+                        <div class="course-card-top">
+                            <span class="course-code">CS-210</span>
+                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+                        </div>
+                        <h2>Data Structures</h2>
+                        <p class="course-instructor">Prof. Daniel Ortega</p>
+                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Wed 11:30 and Fri 9:00</p>
+                        <dl class="course-details">
+                            <div><dt>Current grade</dt><dd>92%</dd></div>
+                            <div><dt>Open tasks</dt><dd>2</dd></div>
+                            <div><dt>Next deadline</dt><dd>Milestone 1, 9 Oct</dd></div>
+                            <div><dt>Studied this week</dt><dd>4 h</dd></div>
+                        </dl>
+                        <div class="course-progress" role="img" aria-label="Current grade 92 percent"><span style="width: 92%;"></span></div>
+                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                    </article>
+
+                    <article class="card course-card course-physics">
+                        <div class="course-card-top">
+                            <span class="course-code">PHY-202</span>
+                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-atom"></i></span>
+                        </div>
+                        <h2>Physics II</h2>
+                        <p class="course-instructor">Prof. Sofia Lindqvist</p>
+                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Tue 10:00 and Thu lab 10:00</p>
+                        <dl class="course-details">
+                            <div><dt>Current grade</dt><dd>75%</dd></div>
+                            <div><dt>Open tasks</dt><dd>2</dd></div>
+                            <div><dt>Next deadline</dt><dd>Lab report, today</dd></div>
+                            <div><dt>Studied this week</dt><dd>2.5 h</dd></div>
+                        </dl>
+                        <div class="course-progress" role="img" aria-label="Current grade 75 percent"><span style="width: 75%;"></span></div>
+                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                    </article>
+
+                    <article class="card course-card course-economics">
+                        <div class="course-card-top">
+                            <span class="course-code">ECO-101</span>
+                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-chart-pie"></i></span>
+                        </div>
+                        <h2>Microeconomics</h2>
+                        <p class="course-instructor">Prof. Marcus Weber</p>
+                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Tue 12:30 and Thu 15:00</p>
+                        <dl class="course-details">
+                            <div><dt>Current grade</dt><dd>86%</dd></div>
+                            <div><dt>Open tasks</dt><dd>3</dd></div>
+                            <div><dt>Next deadline</dt><dd>Quiz, 2 Oct</dd></div>
+                            <div><dt>Studied this week</dt><dd>1 h</dd></div>
+                        </dl>
+                        <div class="course-progress" role="img" aria-label="Current grade 86 percent"><span style="width: 86%;"></span></div>
+                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                    </article>
+
+                    <article class="card add-course-card" id="add-course">
+                        <span class="add-course-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span>
+                        <h2>Add a course</h2>
+                        <p>Name it, pick a colour, and add its class times.</p>
+                    </article>
+                </section>
+
+                <section class="archived-courses" id="archived-courses" aria-label="Archived courses">
+                    <h2>Archived courses</h2>
+                    <p>No archived courses yet.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

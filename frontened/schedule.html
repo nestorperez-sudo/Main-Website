@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule | Study Flow</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="page">
+        <aside id="sidebar" class="aside">
+            <nav aria-label="Main navigation">
+                <div class="sidebar-logo">
+                    <a href="index.html"><span>S</span> Study Flow</a>
+                    <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
+                        <i class="fa-solid fa-angles-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="workspace">Workspace</div>
+                <a class="navigation" href="index.html">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <span>Today</span>
+                </a>
+                <a class="navigation active" href="schedule.html" aria-current="page">
+                    <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                </a>
+                <a class="navigation" href="tasks.html">
+                    <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    <span>Tasks</span>
+                </a>
+                <a class="navigation" href="courses.html">
+                    <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    <span>Courses</span>
+                </a>
+                <a class="navigation" href="statistics.html">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <span>Statistics</span>
+                </a>
+            </nav>
+            <footer>
+                <a href="login.html">Want to log out?</a>
+                <small>Student Account</small>
+            </footer>
+        </aside>
+
+        <div class="content" id="top">
+            <header>
+                <p class="current-date">Thursday, 1 October</p>
+                <div class="header-right-side">
+                    <form role="search">
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
+                        </div>
+                    </form>
+                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="red-circle-alert" aria-hidden="true">3</span>
+                    </a>
+                    <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
+                </div>
+            </header>
+
+            <main class="schedule-main">
+                <div class="schedule-heading">
+                    <div>
+                        <h1>Schedule</h1>
+                        <p>See your month at a glance and what’s on today.</p>
+                    </div>
+                    <span class="schedule-term">Fall 2026</span>
+                </div>
+
+                <div class="schedule-layout">
+                    <section class="card month-card" aria-labelledby="month-title">
+                        <div class="card-header">
+                            <h2 class="card-title" id="month-title">October 2026</h2>
+                            <span class="count">Monthly calendar</span>
+                        </div>
+                        <div class="month-calendar" role="group" aria-label="October 2026 calendar">
+                            <div class="month-weekdays" aria-hidden="true">
+                                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                            </div>
+                            <ol class="month-days">
+                                <li class="outside-month"><span>28</span></li>
+                                <li class="outside-month"><span>29</span></li>
+                                <li class="outside-month"><span>30</span></li>
+                                <li class="selected-day" aria-current="date"><span>1</span><i aria-hidden="true"></i></li>
+                                <li class="has-event"><span>2</span><i aria-hidden="true"></i></li>
+                                <li><span>3</span></li>
+                                <li><span>4</span></li>
+                                <li class="has-event"><span>5</span><i aria-hidden="true"></i></li>
+                                <li><span>6</span></li>
+                                <li class="has-event"><span>7</span><i aria-hidden="true"></i></li>
+                                <li><span>8</span></li>
+                                <li><span>9</span></li>
+                                <li><span>10</span></li>
+                                <li><span>11</span></li>
+                                <li class="has-event"><span>12</span><i aria-hidden="true"></i></li>
+                                <li><span>13</span></li>
+                                <li class="has-event"><span>14</span><i aria-hidden="true"></i></li>
+                                <li><span>15</span></li>
+                                <li><span>16</span></li>
+                                <li><span>17</span></li>
+                                <li><span>18</span></li>
+                                <li><span>19</span></li>
+                                <li class="has-event"><span>20</span><i aria-hidden="true"></i></li>
+                                <li><span>21</span></li>
+                                <li><span>22</span></li>
+                                <li class="has-event"><span>23</span><i aria-hidden="true"></i></li>
+                                <li><span>24</span></li>
+                                <li><span>25</span></li>
+                                <li><span>26</span></li>
+                                <li><span>27</span></li>
+                                <li class="has-event"><span>28</span><i aria-hidden="true"></i></li>
+                                <li><span>29</span></li>
+                                <li><span>30</span></li>
+                                <li><span>31</span></li>
+                                <li class="outside-month"><span>1</span></li>
+                            </ol>
+                        </div>
+                        <div class="calendar-key">
+                            <span><i class="selected-key" aria-hidden="true"></i>Selected day</span>
+                            <span><i class="event-key" aria-hidden="true"></i>Has events</span>
+                        </div>
+                    </section>
+
+                    <section class="card day-agenda" aria-labelledby="agenda-title">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title" id="agenda-title">Your schedule</h2>
+                                <p class="agenda-date">Thursday, 1 – Wednesday, 7 October</p>
+                            </div>
+                            <div class="schedule-view-switch" role="group" aria-label="Schedule view">
+                                <button class="schedule-view-button" type="button" aria-pressed="true" aria-controls="weekly-agenda" data-schedule-view="weekly">Weekly</button>
+                                <button class="schedule-view-button" type="button" aria-pressed="false" aria-controls="daily-agenda" data-schedule-view="daily">Daily</button>
+                            </div>
+                        </div>
+                        <div class="agenda-view" id="weekly-agenda">
+                            <div class="weekly-day">
+                                <h3 class="weekly-day-heading"><span>Thursday</span><time datetime="2026-10-01">1 Oct</time></h3>
+                                <ol class="agenda-list">
+                                    <li class="agenda-item agenda-calculus">
+                                        <time datetime="09:00">09:00</time>
+                                        <div><h4>Calculus II</h4><p>Lecture <span aria-hidden="true">·</span> Room 204</p></div>
+                                    </li>
+                                    <li class="agenda-item agenda-study">
+                                        <time datetime="11:30">11:30</time>
+                                        <div><h4>Calculus II study session</h4><p>Study <span aria-hidden="true">·</span> Library, Room 3</p></div>
+                                    </li>
+                                    <li class="agenda-item agenda-physics">
+                                        <time datetime="14:00">14:00</time>
+                                        <div><h4>Physics II Lab</h4><p>Class <span aria-hidden="true">·</span> Science Building</p></div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="weekly-day">
+                                <h3 class="weekly-day-heading"><span>Friday</span><time datetime="2026-10-02">2 Oct</time></h3>
+                                <ol class="agenda-list">
+                                    <li class="agenda-item agenda-economics">
+                                        <time datetime="15:00">15:00</time>
+                                        <div><h4>Microeconomics quiz</h4><p>Assessment <span aria-hidden="true">·</span> Room 108</p></div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="weekly-day weekly-day-empty">
+                                <h3 class="weekly-day-heading"><span>Saturday</span><time datetime="2026-10-03">3 Oct</time></h3>
+                                <p>No events planned.</p>
+                            </div>
+                            <div class="weekly-day weekly-day-empty">
+                                <h3 class="weekly-day-heading"><span>Sunday</span><time datetime="2026-10-04">4 Oct</time></h3>
+                                <p>No events planned.</p>
+                            </div>
+                            <div class="weekly-day">
+                                <h3 class="weekly-day-heading"><span>Monday</span><time datetime="2026-10-05">5 Oct</time></h3>
+                                <ol class="agenda-list">
+                                    <li class="agenda-item agenda-calculus">
+                                        <time datetime="23:59">23:59</time>
+                                        <div><h4>Calculus II problem set</h4><p>Assignment due</p></div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="weekly-day weekly-day-empty">
+                                <h3 class="weekly-day-heading"><span>Tuesday</span><time datetime="2026-10-06">6 Oct</time></h3>
+                                <p>No events planned.</p>
+                            </div>
+                            <div class="weekly-day">
+                                <h3 class="weekly-day-heading"><span>Wednesday</span><time datetime="2026-10-07">7 Oct</time></h3>
+                                <ol class="agenda-list">
+                                    <li class="agenda-item agenda-economics">
+                                        <time datetime="09:00">09:00</time>
+                                        <div><h4>Calculus II midterm</h4><p>Exam <span aria-hidden="true">·</span> Lecture Hall</p></div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="agenda-view" id="daily-agenda" hidden>
+                            <h3 class="daily-agenda-heading">Thursday, 1 October</h3>
+                            <ol class="agenda-list">
+                                <li class="agenda-item agenda-calculus">
+                                    <time datetime="09:00">09:00</time>
+                                    <div><h4>Calculus II</h4><p>Lecture <span aria-hidden="true">·</span> Room 204</p></div>
+                                </li>
+                                <li class="agenda-item agenda-study">
+                                    <time datetime="11:30">11:30</time>
+                                    <div><h4>Calculus II study session</h4><p>Study <span aria-hidden="true">·</span> Library, Room 3</p></div>
+                                </li>
+                                <li class="agenda-item agenda-physics">
+                                    <time datetime="14:00">14:00</time>
+                                    <div><h4>Physics II Lab</h4><p>Class <span aria-hidden="true">·</span> Science Building</p></div>
+                                </li>
+                            </ol>
+                            <div class="agenda-note">
+                                <i class="fa-regular fa-lightbulb" aria-hidden="true"></i>
+                                <p>You have a free afternoon after 15:00.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
