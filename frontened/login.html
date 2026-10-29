@@ -6,6 +6,7 @@
     <title>Login Page</title>
 
     <link rel="stylesheet" href="login.css">
+    <script src="login.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -20,13 +21,13 @@
                 <div class="sidebar-logo">
                     <a href="#top"><span>S</span> Study Flow</a>
                 </div>
-                    <div class="sign-up">
-                        <i class="fa-solid fa-circle-user"></i>
-                        <p class="p-link">Sign Up</p>
-                    </div>
+                    <button class="sign-up" id="auth-mode-toggle" type="button" aria-controls="signup-section" aria-expanded="false">
+                        <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+                        <span>Sign Up</span>
+                    </button>
                 </header>
-                <section class="sign-in-section">
-                    <h1>Sign In</h1>
+                <section class="sign-in-section" id="signin-section" aria-labelledby="signin-heading">
+                    <h1 id="signin-heading">Sign In</h1>
                     <div class="prompt">
                         <input type="email" id="email-prompt" placeholder="Email or Username">
                     </div>
@@ -39,6 +40,32 @@
                         <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         <button onclick="window.location.href='index.html'">Sign In</button>
                     </div>
+                </section>
+                <section class="sign-up-section" id="signup-section" aria-labelledby="signup-heading" hidden>
+                    <h1 id="signup-heading">Create your account</h1>
+                    <p class="signup-intro">Start organizing your study life with Study Flow.</p>
+                    <form class="signup-form" id="signup-form">
+                        <label for="signup-name">Full name</label>
+                        <input id="signup-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+
+                        <label for="signup-confirm-password">Confirm password</label>
+                        <input id="signup-confirm-password" name="confirm-password" type="password" autocomplete="new-password" placeholder="Enter your password again" required>
+
+                        <button class="signin-button signup-submit" type="submit">
+                            <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                            Create account
+                        </button>
+                        <p class="signup-status" id="signup-status" role="status" hidden>
+                            This form is a prototype. Account creation is not connected yet.
+                        </p>
+                    </form>
+                    <p class="signup-switch">Already have an account? <button type="button" id="signin-mode-button">Sign in</button></p>
                 </section>
                 <footer class="footer-login">
                     <p>2025 Study Flow</p>

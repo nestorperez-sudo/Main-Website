@@ -58,10 +58,12 @@
                             <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
                         </div>
                     </form>
-                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
-                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
-                        <span class="red-circle-alert" aria-hidden="true">3</span>
-                    </a>
+                    <div class="notification-control">
+                        <button type="button" id="notification-toggle" class="alert-row" aria-label="Notifications, 3 unread" aria-expanded="false" aria-controls="notifications-panel">
+                            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                            <span class="red-circle-alert" aria-hidden="true">3</span>
+                        </button>
+                    </div>
                     <a class="profile-picture" href="settings.html" aria-label="Profile settings" aria-current="page">AL</a>
                 </div>
             </header>

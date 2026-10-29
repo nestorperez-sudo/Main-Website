@@ -107,10 +107,16 @@ a {
     display: flex;
     align-items: center;
     gap: 8px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+    cursor: pointer;
 }
 
-.sign-up p{
-    margin: 0;
+.sign-up:hover span {
+    text-decoration: underline;
 }
 
 .login-panel {
@@ -126,6 +132,22 @@ a {
     margin-top: 25px;
 }
 
+.sign-up-section {
+    width: 100%;
+    max-width: 420px;
+    margin: 12px auto 0;
+    padding: 0 clamp(16px, 2.5vw, 30px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+#signin-section[hidden],
+#signup-section[hidden] {
+    display: none;
+}
+
 /* ---------------- sign-in-section ------------------------ */
 
 .sign-in-section {
@@ -139,7 +161,8 @@ a {
     box-sizing: border-box;
 }
 
-.sign-in-section h1 {
+.sign-in-section h1,
+.sign-up-section h1 {
     margin: 0 0 8px;
     color: var(--navy);
     font-size: clamp(2rem, 3vw, 2.4rem);
@@ -225,6 +248,70 @@ a {
     cursor: pointer;
 }
 
+.signup-intro {
+    margin: 0 0 4px;
+    color: var(--gray);
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.signup-form label {
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.signup-form input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--cream);
+    color: var(--text);
+    font: inherit;
+}
+
+.signup-form input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(199, 163, 90, 0.18);
+}
+
+.signup-submit {
+    width: 100%;
+    margin-top: 6px;
+    border: 0;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.signup-status {
+    margin: 0;
+    color: var(--gray);
+    text-align: center;
+}
+
+.signup-switch {
+    margin: 4px 0 0;
+    color: var(--gray);
+    text-align: center;
+}
+
+.signup-switch button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 /* footer */
 
 .footer-login {
@@ -286,6 +373,12 @@ a {
 
     .sign-in-section {
         width: 100%;
+        max-width: 420px;
+        padding: 0 clamp(14px, 5vw, 20px);
+        margin-top: 10px;
+    }
+
+    .sign-up-section {
         max-width: 420px;
         padding: 0 clamp(14px, 5vw, 20px);
         margin-top: 10px;

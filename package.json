@@ -4,6 +4,7 @@
   "description": "",
   "main": "frontened/app.js",
   "scripts": {
+    "start": "vite frontened",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,8 +15,10 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  },
   "bugs": {
     "url": "https://github.com/nestorperez-sudo/Main-Website/issues"
-  },
-  "homepage": "https://github.com/nestorperez-sudo/Main-Website#readme"
+  }
 }

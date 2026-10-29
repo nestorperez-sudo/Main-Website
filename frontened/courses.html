@@ -58,10 +58,12 @@
                             <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
                         </div>
                     </form>
-                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
-                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
-                        <span class="red-circle-alert" aria-hidden="true">3</span>
-                    </a>
+                    <div class="notification-control">
+                        <button type="button" id="notification-toggle" class="alert-row" aria-label="Notifications, 3 unread" aria-expanded="false" aria-controls="notifications-panel">
+                            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                            <span class="red-circle-alert" aria-hidden="true">3</span>
+                        </button>
+                    </div>
                     <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
                 </div>
             </header>
@@ -82,7 +84,7 @@
                 </div>
 
                 <section class="course-grid" id="courses" aria-label="Fall 2026 courses">
-                    <article class="card course-card course-calculus">
+                    <article class="card course-card course-calculus" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Calculus II course details">
                         <div class="course-card-top">
                             <span class="course-code">MAT-201</span>
                             <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-calculator"></i></span>
@@ -98,9 +100,14 @@
                         </dl>
                         <div class="course-progress" role="img" aria-label="Current grade 84 percent"><span style="width: 84%;"></span></div>
                         <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                        <ul class="course-assignment-source" hidden>
+                            <li><span>Problem set 4</span><time datetime="2026-10-05">5 Oct 2026</time></li>
+                            <li><span>Calculus II midterm</span><time datetime="2026-10-07">7 Oct 2026</time></li>
+                            <li><span>Calculus II problem set</span><time datetime="2026-10-26">26 Oct 2026</time></li>
+                        </ul>
                     </article>
 
-                    <article class="card course-card course-data">
+                    <article class="card course-card course-data" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Data Structures course details">
                         <div class="course-card-top">
                             <span class="course-code">CS-210</span>
                             <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
@@ -111,14 +118,17 @@
                         <dl class="course-details">
                             <div><dt>Current grade</dt><dd>92%</dd></div>
                             <div><dt>Open tasks</dt><dd>2</dd></div>
-                            <div><dt>Next deadline</dt><dd>Milestone 1, 9 Oct</dd></div>
+                            <div><dt>Next deadline</dt><dd>Milestone 1, 28 Oct</dd></div>
                             <div><dt>Studied this week</dt><dd>4 h</dd></div>
                         </dl>
                         <div class="course-progress" role="img" aria-label="Current grade 92 percent"><span style="width: 92%;"></span></div>
                         <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                        <ul class="course-assignment-source" hidden>
+                            <li><span>Data Structures milestone 1</span><time datetime="2026-10-28">28 Oct 2026</time></li>
+                        </ul>
                     </article>
 
-                    <article class="card course-card course-physics">
+                    <article class="card course-card course-physics" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Physics II course details">
                         <div class="course-card-top">
                             <span class="course-code">PHY-202</span>
                             <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-atom"></i></span>
@@ -134,9 +144,12 @@
                         </dl>
                         <div class="course-progress" role="img" aria-label="Current grade 75 percent"><span style="width: 75%;"></span></div>
                         <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                        <ul class="course-assignment-source" hidden>
+                            <li><span>Physics II lab report</span><time datetime="2026-10-21">Due today</time></li>
+                        </ul>
                     </article>
 
-                    <article class="card course-card course-economics">
+                    <article class="card course-card course-economics" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Microeconomics course details">
                         <div class="course-card-top">
                             <span class="course-code">ECO-101</span>
                             <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-chart-pie"></i></span>
@@ -152,6 +165,10 @@
                         </dl>
                         <div class="course-progress" role="img" aria-label="Current grade 86 percent"><span style="width: 86%;"></span></div>
                         <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
+                        <ul class="course-assignment-source" hidden>
+                            <li><span>Microeconomics quiz</span><time datetime="2026-10-02">2 Oct 2026</time></li>
+                            <li><span>Microeconomics quiz</span><time datetime="2026-10-23">23 Oct 2026</time></li>
+                        </ul>
                     </article>
 
                     <article class="card add-course-card" id="add-course">
@@ -160,6 +177,23 @@
                         <p>Name it, pick a colour, and add its class times.</p>
                     </article>
                 </section>
+
+                <dialog class="course-detail-dialog" id="course-detail-dialog" aria-labelledby="course-detail-title">
+                    <div class="course-detail-content">
+                        <div class="course-detail-header">
+                            <div>
+                                <span class="course-code" id="course-detail-code"></span>
+                                <h2 id="course-detail-title"></h2>
+                            </div>
+                            <button class="course-detail-close" type="button" aria-label="Close course details">×</button>
+                        </div>
+                        <p class="course-detail-instructor" id="course-detail-instructor"></p>
+                        <p class="course-detail-meeting" id="course-detail-meeting"></p>
+                        <div id="course-detail-summary"></div>
+                        <h3>Assignments and deadlines</h3>
+                        <ol class="course-assignment-list" id="course-detail-assignments"></ol>
+                    </div>
+                </dialog>
 
                 <section class="archived-courses" id="archived-courses" aria-label="Archived courses">
                     <h2>Archived courses</h2>
