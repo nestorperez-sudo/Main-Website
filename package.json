@@ -20,5 +20,8 @@
   },
   "bugs": {
     "url": "https://github.com/nestorperez-sudo/Main-Website/issues"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
   }
 }
