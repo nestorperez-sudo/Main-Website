@@ -4,7 +4,8 @@
   "description": "",
   "main": "frontened/app.js",
   "scripts": {
-    "start": "vite frontened",
+    "start": "node server.js",
+    "dev": "vite frontened",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
