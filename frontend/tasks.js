@@ -46,6 +46,6 @@ taskForm.addEventListener("submit", async (event) => {
   taskForm.reset();
   closePopup();
   loadTasks();   // refresh the list from the server
-};
+});
 
 loadTasks();

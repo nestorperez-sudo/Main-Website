@@ -385,56 +385,56 @@
             <i class="fa-solid fa-x x-popup"></i>
         </div>
         <p style="margin-bottom: 8px;">Add it to your plan so it shows up</p>
-        <form class="form-popup" action="">
+        <form class="form-popup" id="task-form">
             <label for="">Type</label>
             <div class="types-task">
-                <button>Assignment</button>
-                <button>Exam</button>
-                <button>Project</button>
-                <button>Personal</button>
+                <button type="button">Assignment</button>
+                <button type="button">Exam</button>
+                <button type="button">Project</button>
+                <button type="button">Personal</button>
             </div>
 
             <div class="additional-info-popup">
                 <div class="popup-course">
-                    <label for="">Course</label>
-                    <select name="" id="" required>
+                    <label for="task-course">Course</label>
+                    <select name="course" id="task-course" required>
                         <option value="Math">Math</option>
                         <option value="Science" selected>Science</option>
                         <option value="Data">Data</option>
                     </select>
                 </div>
                 <div>
-                    <label for="">Assignment</label>
-                    <input type="text" placeholder="Test" required>
+                    <label for="task-title">Assignment</label>
+                    <input type="text" name="title" id="task-title" placeholder="Test" required>
                 </div>
                 <div>
-                    <label for="">Due date</label>
-                    <input type="date" required>
+                    <label for="task-date">Due date</label>
+                    <input type="date" name="dueDate" id="task-date" required>
                 </div>
                 <div>
-                    <label for="">Time <span>(optional)</span></label>
-                    <input type="time">
+                    <label for="task-time">Time <span>(optional)</span></label>
+                    <input type="time" name="dueTime" id="task-time">
                 </div>
-            </div>
-            
-            <label for="" style="margin-top: 8px;">Priority</label>
-            <div class="types-task">
-                <button style="background-color: var(--green);">Low</button>
-                <button>Medium</button>
-                <button style="background-color: var(--gold);">High</button>
             </div>
 
-            <label for="">Remind me</label>
-            <select name="" id="" required aria-placeholder="1-day">
+            <label for="" style="margin-top: 8px;">Priority</label>
+            <div class="types-task">
+                <button type="button" style="background-color: var(--green);">Low</button>
+                <button type="button">Medium</button>
+                <button type="button" style="background-color: var(--gold);">High</button>
+            </div>
+
+            <label for="task-reminder">Remind me</label>
+            <select name="reminder" id="task-reminder" required>
                 <option value="no-reminder">No reminder</option>
                 <option value="1-day">1 day before</option>
                 <option value="3-day" selected>3 days before</option>
                 <option value="1-week">1 week before</option>
             </select>
 
-            <label for="" style="margin-top: 8px;">Short description <span>(Optional)</span></label>
-            <input type="text">
-            
+            <label for="task-description" style="margin-top: 8px;">Short description <span>(Optional)</span></label>
+            <input type="text" name="description" id="task-description">
+
             <div class="popup-btns" style="margin-top: 8px;">
                 <button type="reset" class="reset-btn">Reset</button>
                 <button type="submit">Submit</button>
