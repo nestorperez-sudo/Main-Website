@@ -58,10 +58,38 @@
                             <input class="search-bar-input" type="search" placeholder="Search tasks, courses..." aria-label="Search tasks and courses">
                         </div>
                     </form>
-                    <a href="alert.index" class="alert-row" aria-label="Alerts, 3 new">
-                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
-                        <span class="red-circle-alert" aria-hidden="true">3</span>
-                    </a>
+                    <details class="notification-menu">
+                        <summary class="alert-row" aria-label="Show notifications">
+                            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                            <span class="red-circle-alert" aria-hidden="true"></span>
+                        </summary>
+                        <div class="notification-dropdown">
+                            <h2>Notifications</h2>
+                            <ul class="notification-list">
+                                <li>
+                                    <input class="notification-dismiss-toggle" id="notification-statistics-1" type="checkbox">
+                                    <div class="notification-item">
+                                        <div><strong>Due today</strong><p>Physics II lab report is due at 11:59 PM.</p></div>
+                                        <label class="notification-dismiss" for="notification-statistics-1" aria-label="Dismiss Physics II lab report notification">x</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <input class="notification-dismiss-toggle" id="notification-statistics-2" type="checkbox">
+                                    <div class="notification-item">
+                                        <div><strong>Coming up</strong><p>Your Calculus II midterm is in 6 days.</p></div>
+                                        <label class="notification-dismiss" for="notification-statistics-2" aria-label="Dismiss Calculus II midterm notification">x</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <input class="notification-dismiss-toggle" id="notification-statistics-3" type="checkbox">
+                                    <div class="notification-item">
+                                        <div><strong>Plan ahead</strong><p>You have 2 tasks to plan for tomorrow.</p></div>
+                                        <label class="notification-dismiss" for="notification-statistics-3" aria-label="Dismiss task planning notification">x</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
                     <a class="profile-picture" href="settings.html" aria-label="Profile settings">AL</a>
                 </div>
             </header>

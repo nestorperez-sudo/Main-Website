@@ -337,12 +337,12 @@ header {
 
 .red-circle-alert {
     position: absolute;
-    top: 3px;
-    right: 3px;
+    top: 5px;
+    right: 8px;
     display: grid;
     place-items: center;
-    min-width: 16px;
-    height: 16px;
+    width: 11px;
+    height: 11px;
     padding: 0 3px;
     border-radius: 50%;
     background-color: var(--red);
@@ -350,6 +350,114 @@ header {
     font-size: .6rem;
     font-weight: 600;
     line-height: 1;
+}
+
+.notification-menu {
+    position: relative;
+    z-index: 10;
+}
+
+.notification-menu > summary {
+    list-style: none;
+}
+
+.notification-menu > summary::-webkit-details-marker {
+    display: none;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
+    width: min(360px, calc(100vw - 32px));
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0 8px 20px rgba(17, 43, 70, 0.06);
+}
+
+.notification-menu:hover .notification-dropdown,
+.notification-menu:focus-within .notification-dropdown,
+.notification-menu[open] .notification-dropdown {
+    display: block;
+}
+
+.notification-dropdown h2 {
+    padding: 4px 8px 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--navy);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.notification-list {
+    max-height: min(320px, calc(100dvh - 140px));
+    overflow-y: auto;
+}
+
+.notification-dismiss-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--line);
+}
+
+.notification-list li:last-child .notification-item {
+    border-bottom: 0;
+}
+
+.notification-dismiss-toggle:checked + .notification-item {
+    display: none;
+}
+
+.notification-item strong {
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.notification-item p {
+    margin-top: 4px;
+    color: var(--gray);
+    font-size: 0.75rem;
+}
+
+.notification-dismiss {
+    display: grid;
+    flex: 0 0 24px;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    color: var(--gray);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.notification-dismiss:hover {
+    color: var(--red);
+}
+
+.notification-dismiss-toggle:focus-visible + .notification-item .notification-dismiss {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
 }
 
 .profile-picture {
@@ -1195,6 +1303,13 @@ main {
 
 .course-card {
     border-top: 3px solid var(--course-color);
+    transition: all 0.25s;
+}
+
+.course-card:hover {
+    box-shadow: 5px 5px 20px rgba(17, 43, 70, 0.1);
+    color: var(--navy);
+    transform: translateY(-2px);
 }
 
 .course-card-top {
@@ -1317,6 +1432,7 @@ main {
     box-shadow: none;
     color: var(--gray-soft);
     text-align: center;
+    transition: all 0.25s;
 }
 
 
@@ -2618,11 +2734,12 @@ main {
     background-color: var(--white);
     color: var(--gray);
     font-size: .75rem;
+    white-space: nowrap;
 }
 
 .schedule-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(280px, .8fr) minmax(0, 1.5fr);
     align-items: start;
     gap: 10px;
 }
@@ -2777,6 +2894,54 @@ main {
     background-color: var(--gold);
 }
 
+.schedule-preview {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+}
+
+.schedule-preview-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.schedule-preview-heading h3 {
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.schedule-preview-heading span,
+.schedule-preview li time {
+    color: var(--gray);
+    font-size: .75rem;
+}
+
+.schedule-preview ul {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.schedule-preview li {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 8px;
+    align-items: baseline;
+}
+
+.schedule-preview li time {
+    font-weight: 600;
+}
+
+.schedule-preview li span {
+    min-width: 0;
+    font-size: .8rem;
+    overflow-wrap: anywhere;
+}
+
 .agenda-date {
     margin-top: 3px;
     color: var(--gray);
@@ -2784,10 +2949,27 @@ main {
     font-weight: 400;
 }
 
+#weekly-agenda:not([hidden]) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-content: start;
+    gap: 12px 10px;
+}
+
+.weekly-day {
+    min-width: 0;
+}
+
+.weekly-day .agenda-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    padding: 8px;
+}
+
 .weekly-day + .weekly-day {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
 }
 
 .weekly-day-heading {
@@ -2891,9 +3073,19 @@ main {
     color: var(--gold-deep);
 }
 
-@media (max-width: 856px) {
+@media (max-width: 1200px) {
+    #weekly-agenda:not([hidden]) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1000px) {
     .schedule-layout {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    #weekly-agenda:not([hidden]) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
@@ -2933,5 +3125,22 @@ main {
     .agenda-item {
         gap: 8px;
         padding: 10px;
+    }
+
+    #weekly-agenda:not([hidden]) {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    #weekly-agenda .agenda-item {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 8px;
+        padding: 10px;
+    }
+
+    #weekly-agenda .weekly-day + .weekly-day {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
     }
 }
