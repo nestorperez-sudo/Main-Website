@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
+    <script src="tasks.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -178,7 +179,7 @@
             <div class="additional-info-popup">
                 <div class="popup-course">
                     <label for="">Course</label>
-                    <select name="" id="" required>
+                    <select name="course" id="" required>
                         <option value="Math">Math</option>
                         <option value="Science" selected>Science</option>
                         <option value="Data">Data</option>
@@ -186,15 +187,15 @@
                 </div>
                 <div>
                     <label for="">Assignment</label>
-                    <input type="text" placeholder="Test" required>
+                    <input type="text" name="title" placeholder="Test" required>
                 </div>
                 <div>
                     <label for="">Due date</label>
-                    <input type="date" required>
+                    <input type="date" name="dueDate" required>
                 </div>
                 <div>
                     <label for="">Time <span>(optional)</span></label>
-                    <input type="time">
+                    <input type="time" name="dueTime">
                 </div>
             </div>
 
@@ -206,7 +207,7 @@
             </div>
 
             <label for="">Remind me</label>
-            <select name="" id="" required aria-placeholder="1-day">
+            <select name="reminder" id="" required aria-placeholder="1-day">
                 <option value="no-reminder">No reminder</option>
                 <option value="1-day">1 day before</option>
                 <option value="3-day" selected>3 days before</option>
@@ -214,11 +215,11 @@
             </select>
 
             <label for="" style="margin-top: 8px;">Short description <span>(Optional)</span></label>
-            <input type="text">
+            <input type="text" name="description">
 
             <div class="popup-btns" style="margin-top: 8px;">
                 <button type="reset" class="reset-btn">Reset</button>
-                <button onclick="closePopup()" type="submit">Submit</button>
+                <button type="submit">Submit</button>
             </div>
         </form>
     </div>
