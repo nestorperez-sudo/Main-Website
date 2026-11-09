@@ -1,6 +1,6 @@
 # Study Flow: visual conventions
 
-Observed from `style.css` / `login.css`. Treat the scanner output as the source of truth for numbers; this file captures intent. Update it when the design intentionally changes.
+Observed from `styles.css` / `login.css`. Treat the scanner output as the source of truth for numbers; this file captures intent. Update it when the design intentionally changes.
 
 ## Identity
 A calm, editorial study planner: deep navy, warm cream, a restrained gold accent. Flat and rectilinear on the dashboard (square corners, hairline borders, soft diffuse shadows). The login page is the one place with large rounded corners (25px), as a framed card.
@@ -33,4 +33,4 @@ Poppins. Base `12px/1.5` on body. Small meta text 10px / .6rem; titles `1.2rem` 
 Dashboard is CSS grid: `.page` = `auto 1fr`; card rows use `1fr 1fr 1fr` / `1.7fr 1fr` with 10px gaps; `main` padding 25px. Breakpoints in use: 856px, 756px, 462px (reuse these). Prefer `clamp()`, `fr` and `%` over fixed widths.
 
 ## Known inconsistencies (mention, don't silently "fix")
-- `--green` is `#84b9a0` in `style.css` but `#6a927f` in `login.css`.
+- `--green` is `#84b9a0` in `styles.css` but `#6a927f` in `login.css`.

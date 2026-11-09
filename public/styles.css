@@ -954,6 +954,14 @@ main {
     margin-bottom: 8px;
 }
 
+.types-task button[aria-pressed="false"] {
+    opacity: 0.55;
+}
+
+.types-task button[aria-pressed="true"] {
+    box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--navy);
+}
+
 .additional-info-popup div {
     display: flex;
     flex-direction: column;

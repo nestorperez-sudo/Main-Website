@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings | Study Flow</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/main.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <div class="page">
         <aside id="sidebar" class="aside">
-            <nav>
+            <nav aria-label="Main navigation">
                 <div class="sidebar-logo">
                     <a href="index.html"><span>S</span> Study Flow</a>
                     <button type="button" class="sidebar-toggle" id="arrow-collapse" aria-label="Collapse sidebar" aria-expanded="true" onclick="toggleSidebar(this)">
@@ -90,7 +90,7 @@
                                 <span class="settings-avatar" aria-hidden="true">AL</span>
                                 <div>
                                     <label class="settings-photo-button" for="profile-photo">Change photo</label>
-                                    <input class="settings-file-input" id="profile-photo" type="file" accept="image/png,image/jpeg">
+                                    <input class="settings-file-input" id="profile-photo" name="photo" type="file" accept="image/png,image/jpeg">
                                     <p class="settings-hint">JPG or PNG, up to 2 MB.</p>
                                 </div>
                             </div>
@@ -166,28 +166,28 @@
                                     <label for="deadline-reminders">Deadline reminders</label>
                                     <small>Get an alert before tasks are due, using the reminder you set.</small>
                                 </div>
-                                <label class="settings-switch" for="deadline-reminders"><input id="deadline-reminders" type="checkbox" checked><span aria-hidden="true"></span></label>
+                                <label class="settings-switch" for="deadline-reminders"><input id="deadline-reminders" name="deadline-reminders" type="checkbox" checked><span aria-hidden="true"></span></label>
                             </div>
                             <div class="settings-option-row">
                                 <div class="settings-option-description">
                                     <label for="exam-countdown">Exam countdown</label>
                                     <small>Remind me to plan study sessions as exams get closer.</small>
                                 </div>
-                                <label class="settings-switch" for="exam-countdown"><input id="exam-countdown" type="checkbox" checked><span aria-hidden="true"></span></label>
+                                <label class="settings-switch" for="exam-countdown"><input id="exam-countdown" name="exam-countdown" type="checkbox" checked><span aria-hidden="true"></span></label>
                             </div>
                             <div class="settings-option-row">
                                 <div class="settings-option-description">
                                     <label for="daily-summary">Daily summary email</label>
                                     <small>Your plan for the day, sent at 7:30.</small>
                                 </div>
-                                <label class="settings-switch" for="daily-summary"><input id="daily-summary" type="checkbox"><span aria-hidden="true"></span></label>
+                                <label class="settings-switch" for="daily-summary"><input id="daily-summary" name="daily-summary" type="checkbox"><span aria-hidden="true"></span></label>
                             </div>
                             <div class="settings-option-row">
                                 <div class="settings-option-description">
                                     <label for="weekly-report">Weekly report</label>
                                     <small>A summary of your study time and grades every Monday.</small>
                                 </div>
-                                <label class="settings-switch" for="weekly-report"><input id="weekly-report" type="checkbox" checked><span aria-hidden="true"></span></label>
+                                <label class="settings-switch" for="weekly-report"><input id="weekly-report" name="weekly-report" type="checkbox" checked><span aria-hidden="true"></span></label>
                             </div>
                         </section>
 

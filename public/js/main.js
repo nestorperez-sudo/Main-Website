@@ -23,12 +23,20 @@ window.addEventListener("resize", expandSidebarOnSmallScreens);
 
 /* Toggle pop up */
 function openPopup() {
-    popup.classList.add("open")
+    popup?.classList.add("open");
+    popup?.querySelector("input:not([type='hidden']), select")?.focus();
 }
 
 function closePopup() {
-    popup.classList.remove("open")
+    popup?.classList.remove("open");
 }
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && popup?.classList.contains("open")) {
+        closePopup();
+        document.querySelector(".add-task-btn")?.focus();
+    }
+});
 
 const scheduleViewButtons = document.querySelectorAll("[data-schedule-view]");
 const scheduleViews = document.querySelectorAll(".agenda-view");
@@ -51,15 +59,20 @@ const notificationToggle = document.getElementById("notification-toggle");
 const notificationControl = notificationToggle?.parentElement;
 
 if (notificationToggle && notificationControl) {
+    // Dismissals are remembered per browser until the backend stores them per user.
     const notificationStorageKey = "study-flow-dismissed-notifications";
-    const storedDismissals = localStorage.getItem(notificationStorageKey);
-    const parsedDismissals = storedDismissals === null ? [] : JSON.parse(storedDismissals);
+    const readDismissals = () => {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(notificationStorageKey) ?? "[]");
+            return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "string") : [];
+        } catch {
+            // Corrupt or blocked storage shouldn't break the rest of the page.
+            return [];
+        }
+    };
 
-    if (!Array.isArray(parsedDismissals) || parsedDismissals.some((id) => typeof id !== "string")) {
-        throw new Error("Saved notification dismissals are invalid.");
-    }
-
-    const dismissedNotifications = new Set(parsedDismissals);
+    const dismissedNotifications = new Set(readDismissals());
+    // BACKEND: replace this sample list with the user's notifications from the API.
     const notifications = [
         {
             id: "physics-lab-report",
@@ -113,10 +126,14 @@ if (notificationToggle && notificationControl) {
             dismissButton.setAttribute("aria-label", `Dismiss ${notification.title} notification`);
             dismissButton.addEventListener("click", () => {
                 dismissedNotifications.add(notification.id);
-                localStorage.setItem(
-                    notificationStorageKey,
-                    JSON.stringify([...dismissedNotifications])
-                );
+                try {
+                    localStorage.setItem(
+                        notificationStorageKey,
+                        JSON.stringify([...dismissedNotifications])
+                    );
+                } catch {
+                    // Storage unavailable: the dismissal still applies for this page view.
+                }
                 renderNotifications();
                 if (unreadNotifications.length === 1) {
                     notificationToggle.focus();

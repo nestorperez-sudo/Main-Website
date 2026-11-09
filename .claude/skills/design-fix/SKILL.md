@@ -25,7 +25,7 @@ If Python isn't available, read the CSS files directly and gather the same thing
 
 ## 2. Pin down the target
 
-Resolve what the user means into concrete selectors plus HTML, in this order of preference: an IDE selection or file:line range; a class/id name; a description ("the add-task popup") which you map to markup by grepping. Read the target's HTML and *all* CSS rules that touch it, including media queries and overrides lower in the file, any inline `style=`, and JS that toggles classes (`app.js`). Many bugs here come from a later rule overriding an earlier one, a duplicated property, or a typo, and you only see that by reading everything that applies.
+Resolve what the user means into concrete selectors plus HTML, in this order of preference: an IDE selection or file:line range; a class/id name; a description ("the add-task popup") which you map to markup by grepping. Read the target's HTML and *all* CSS rules that touch it, including media queries and overrides lower in the file, any inline `style=`, and JS that toggles classes (`js/main.js`). Many bugs here come from a later rule overriding an earlier one, a duplicated property, or a typo, and you only see that by reading everything that applies.
 
 If the user gave a screenshot or only a vague complaint, look at the rendered result when possible (the `run` skill can open the page) rather than guessing from code.
 
@@ -61,4 +61,4 @@ Re-read the edited rules to confirm nothing is overridden or misspelled. If you 
 
 ## Cross-file note
 
-`style.css` and `login.css` both redeclare the `:root` palette. When the scanner shows a token with different values across files, use the value of the file you're editing and flag the mismatch to the user as something to reconcile; don't silently pick one.
+`styles.css` and `login.css` both redeclare the `:root` palette. When the scanner shows a token with different values across files, use the value of the file you're editing and flag the mismatch to the user as something to reconcile; don't silently pick one.

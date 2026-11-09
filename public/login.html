@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Sign In | Study Flow</title>
 
     <link rel="stylesheet" href="login.css">
-    <script src="login.js" defer></script>
+    <script src="js/login.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -19,28 +19,28 @@
             <div class="login-panel">
                 <header class="header-login">
                 <div class="sidebar-logo">
-                    <a href="#top"><span>S</span> Study Flow</a>
+                    <a href="login.html"><span>S</span> Study Flow</a>
                 </div>
                     <button class="sign-up" id="auth-mode-toggle" type="button" aria-controls="signup-section" aria-expanded="false">
                         <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
                         <span>Sign Up</span>
                     </button>
                 </header>
-                <section class="sign-in-section" id="signin-section" aria-labelledby="signin-heading">
+                <form class="sign-in-section" id="signin-section" aria-labelledby="signin-heading">
                     <h1 id="signin-heading">Sign In</h1>
                     <div class="prompt">
-                        <input type="email" id="email-prompt" placeholder="Email or Username">
+                        <input type="email" id="signin-email" name="email" autocomplete="email" placeholder="Email" aria-label="Email" required>
                     </div>
                     <div class="prompt">
-                        <input type="password" id="password-prompt" placeholder="Password">
-                        <i class="fa-regular fa-eye-slash"></i>
+                        <input type="password" id="signin-password" name="password" autocomplete="current-password" placeholder="Password" aria-label="Password" required>
+                        <i class="fa-regular fa-eye-slash" aria-hidden="true"></i>
                     </div>
                     <p>Forgot Password?</p>
                     <div class="signin-button">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        <button onclick="window.location.href='index.html'">Sign In</button>
+                        <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                        <button type="submit">Sign In</button>
                     </div>
-                </section>
+                </form>
                 <section class="sign-up-section" id="signup-section" aria-labelledby="signup-heading" hidden>
                     <h1 id="signup-heading">Create your account</h1>
                     <p class="signup-intro">Start organizing your study life with Study Flow.</p>
