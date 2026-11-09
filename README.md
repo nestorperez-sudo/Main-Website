@@ -160,7 +160,26 @@ Example requests and responses: _to be completed._
 
 ## Postman
 
-_To be completed._
+`postman/studyflow.postman_collection.json` (Collection v2.1) covers the full CRUD of the main resource, `courses`.
+
+1. Start the server with `npm start`. Restart it before each run so it starts from the seed data.
+2. In Postman: **Import** → choose `postman/studyflow.postman_collection.json`.
+3. Open the collection → **Run** (Collection Runner) → **Run Study Flow API**. The requests must run in this order:
+
+| # | Request | Expected |
+| --- | --- | --- |
+| 1 | `POST {{baseUrl}}/courses` | `201` + `Location`; saves the new id in `{{courseId}}` |
+| 2 | `GET {{baseUrl}}/courses` | `200`, includes the new course |
+| 3 | `GET {{baseUrl}}/courses/{{courseId}}` | `200` |
+| 4 | `PUT {{baseUrl}}/courses/{{courseId}}` | `200`, every field replaced |
+| 5 | `DELETE {{baseUrl}}/courses/{{courseId}}` | `204` |
+| 6 | `GET {{baseUrl}}/courses/{{courseId}}` | `404` (it was deleted) |
+| 7 | `POST {{baseUrl}}/courses` with invalid data | `400` with the full `errors` array |
+| 8 | `GET {{baseUrl}}/courses?search=CALC&semester=fall-2026&archived=false` | `200`, filtered |
+| 9 | `GET {{baseUrl}}/courses?semester=winter&archived=maybe` | `400` |
+| 10 | `GET {{baseUrl}}/courses/stats` | `200` |
+
+The collection variable `baseUrl` is `http://localhost:3000/api`. Each request has tests that check its status code and body, so the runner shows a pass or fail for every step.
 
 ## Front end
 

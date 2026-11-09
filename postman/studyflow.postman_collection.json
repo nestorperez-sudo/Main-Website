@@ -1,0 +1,293 @@
+{
+  "info": {
+    "name": "Study Flow API",
+    "description": "Full CRUD on the main resource (courses), plus an invalid POST, the filtered list and /stats.\n\nRun the requests in order against a freshly started server (npm start). Request 1 creates a course and saves its id in the collection variable courseId; requests 3-5 use it.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api", "type": "string" },
+    { "key": "courseId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Create course",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('201 Created', () => pm.response.to.have.status(201));",
+              "pm.test('Location header points to the new course', () => {",
+              "    const course = pm.response.json();",
+              "    pm.expect(pm.response.headers.get('Location')).to.eql(`/api/courses/${course.id}`);",
+              "});",
+              "pm.test('Unknown field and client id were ignored', () => {",
+              "    const course = pm.response.json();",
+              "    pm.expect(course).to.not.have.property('teacherEmail');",
+              "    pm.expect(course.id).to.not.eql(999);",
+              "});",
+              "// Save the new id for the next requests.",
+              "pm.collectionVariables.set('courseId', pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 999,\n  \"code\": \"HIS-110\",\n  \"name\": \"Economic History\",\n  \"instructor\": \"Prof. Clara Ruiz\",\n  \"meetingTimes\": \"Fri 10:00 to 12:00\",\n  \"credits\": 4,\n  \"semester\": \"fall-2026\",\n  \"color\": \"red\",\n  \"archived\": false,\n  \"teacherEmail\": \"this field is not in the resource and is stripped\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/courses", "host": ["{{baseUrl}}"], "path": ["courses"] },
+        "description": "Creates a course. Returns 201, a Location header and the stored course. The id and teacherEmail sent here are ignored."
+      }
+    },
+    {
+      "name": "2. List courses",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('Returns an array that includes the new course', () => {",
+              "    const ids = pm.response.json().map((course) => course.id);",
+              "    pm.expect(ids).to.include(Number(pm.collectionVariables.get('courseId')));",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/courses", "host": ["{{baseUrl}}"], "path": ["courses"] },
+        "description": "Lists every course."
+      }
+    },
+    {
+      "name": "3. Get one course",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('Is the course created in request 1', () => {",
+              "    pm.expect(pm.response.json().code).to.eql('HIS-110');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/courses/{{courseId}}", "host": ["{{baseUrl}}"], "path": ["courses", "{{courseId}}"] },
+        "description": "Gets the course created in request 1. Returns 404 if the id does not exist."
+      }
+    },
+    {
+      "name": "4. Replace course",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('Every field was replaced', () => {",
+              "    const course = pm.response.json();",
+              "    pm.expect(course.name).to.eql('Economic History of Europe');",
+              "    pm.expect(course.archived).to.eql(true);",
+              "    pm.expect(course.meetingTimes).to.eql(null);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"HIS-110\",\n  \"name\": \"Economic History of Europe\",\n  \"instructor\": \"Prof. Clara Ruiz\",\n  \"credits\": 6,\n  \"semester\": \"spring-2027\",\n  \"color\": \"violet\",\n  \"archived\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/courses/{{courseId}}", "host": ["{{baseUrl}}"], "path": ["courses", "{{courseId}}"] },
+        "description": "Replaces the whole course. meetingTimes is left out, so it goes back to null."
+      }
+    },
+    {
+      "name": "5. Delete course",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('204 No Content', () => pm.response.to.have.status(204));",
+              "pm.test('Empty body', () => pm.expect(pm.response.text()).to.eql(''));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/courses/{{courseId}}", "host": ["{{baseUrl}}"], "path": ["courses", "{{courseId}}"] },
+        "description": "Deletes the course (and any tasks, events, study sessions and grades linked to it). Running it again returns 404."
+      }
+    },
+    {
+      "name": "6. Get deleted course (404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('404 Not Found', () => pm.response.to.have.status(404));",
+              "pm.test('JSON error body', () => pm.expect(pm.response.json()).to.eql({ error: 'Not found' }));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/courses/{{courseId}}", "host": ["{{baseUrl}}"], "path": ["courses", "{{courseId}}"] },
+        "description": "The course deleted in request 5 is gone."
+      }
+    },
+    {
+      "name": "7. Create course with invalid data (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('400 Bad Request', () => pm.response.to.have.status(400));",
+              "pm.test('Lists every problem at once', () => {",
+              "    const fields = pm.response.json().errors.map((error) => error.field);",
+              "    pm.expect(fields).to.eql(['code', 'name', 'instructor', 'credits', 'semester', 'color', 'archived']);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"M@T 1\",\n  \"name\": \"\",\n  \"instructor\": 42,\n  \"credits\": 20,\n  \"semester\": \"winter-2026\",\n  \"color\": \"orange\",\n  \"archived\": \"yes\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/courses", "host": ["{{baseUrl}}"], "path": ["courses"] },
+        "description": "Every field is wrong. The 400 body is { errors: [ { field, message }, ... ] } with one entry per problem."
+      }
+    },
+    {
+      "name": "8. Search and filter courses",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('Every result matches all the filters', () => {",
+              "    const courses = pm.response.json();",
+              "    pm.expect(courses.length).to.be.above(0);",
+              "    courses.forEach((course) => {",
+              "        pm.expect(course.name.toLowerCase()).to.include('calc');",
+              "        pm.expect(course.semester).to.eql('fall-2026');",
+              "        pm.expect(course.archived).to.eql(false);",
+              "    });",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/courses?search=CALC&semester=fall-2026&archived=false",
+          "host": ["{{baseUrl}}"],
+          "path": ["courses"],
+          "query": [
+            { "key": "search", "value": "CALC", "description": "Case-insensitive match on name or code" },
+            { "key": "semester", "value": "fall-2026", "description": "fall-2026 | spring-2027" },
+            { "key": "archived", "value": "false", "description": "true | false" }
+          ]
+        },
+        "description": "Filters combine. Returns 200 with an array, possibly empty."
+      }
+    },
+    {
+      "name": "9. Filter with invalid values (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('400 Bad Request', () => pm.response.to.have.status(400));",
+              "pm.test('Same error shape as the validators', () => {",
+              "    const fields = pm.response.json().errors.map((error) => error.field);",
+              "    pm.expect(fields).to.eql(['semester', 'archived']);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/courses?semester=winter&archived=maybe",
+          "host": ["{{baseUrl}}"],
+          "path": ["courses"],
+          "query": [
+            { "key": "semester", "value": "winter" },
+            { "key": "archived", "value": "maybe" }
+          ]
+        },
+        "description": "A value outside the closed set or a non-boolean flag returns 400."
+      }
+    },
+    {
+      "name": "10. Course stats",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.test('Has every summary field', () => {",
+              "    const stats = pm.response.json();",
+              "    pm.expect(stats).to.have.all.keys('total', 'active', 'archived', 'totalCredits', 'averageGrade', 'bySemester');",
+              "    pm.expect(stats.active + stats.archived).to.eql(stats.total);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/courses/stats", "host": ["{{baseUrl}}"], "path": ["courses", "stats"] },
+        "description": "Summary computed on every request, never stored."
+      }
+    }
+  ]
+}
