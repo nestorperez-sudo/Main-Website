@@ -42,8 +42,13 @@ function number(input, { required = false, integer = false, min, max, defaultVal
     if (integer && !Number.isInteger(input)) {
         return { error: "Must be a whole number." };
     }
-    if ((min !== undefined && input < min) || (max !== undefined && input > max)) {
-        return { error: `Must be between ${min} and ${max}.` };
+    const tooSmall = min !== undefined && input < min;
+    const tooBig = max !== undefined && input > max;
+    if (tooSmall || tooBig) {
+        if (min !== undefined && max !== undefined) {
+            return { error: `Must be between ${min} and ${max}.` };
+        }
+        return { error: tooSmall ? `Must be at least ${min}.` : `Must be at most ${max}.` };
     }
     return { value: input };
 }

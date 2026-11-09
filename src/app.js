@@ -2,6 +2,11 @@ const path = require("path");
 const express = require("express");
 const logger = require("./middleware/logger");
 const coursesRouter = require("./routes/courses");
+const tasksRouter = require("./routes/tasks");
+const eventsRouter = require("./routes/events");
+const studySessionsRouter = require("./routes/studySessions");
+const gradesRouter = require("./routes/grades");
+const usersRouter = require("./routes/users");
 
 const app = express();
 
@@ -17,6 +22,11 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 // 4. API routers, one per resource, all under /api/<resource>.
 app.use("/api/courses", coursesRouter);
+app.use("/api/tasks", tasksRouter);
+app.use("/api/events", eventsRouter);
+app.use("/api/study-sessions", studySessionsRouter);
+app.use("/api/grades", gradesRouter);
+app.use("/api/users", usersRouter);
 
 // 5. Anything not matched above: JSON 404.
 app.use((req, res) => {
