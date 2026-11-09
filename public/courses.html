@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/courses.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -72,111 +75,106 @@
                 <div class="courses-heading">
                     <div>
                         <h1>Courses</h1>
-                        <p>Fall 2026 semester, 4 courses.</p>
+                        <p id="courses-summary">Loading summary…</p>
                     </div>
                     <div class="courses-actions">
-                        <nav class="semester-tabs" aria-label="Course term">
-                            <a class="is-active" href="#courses" aria-current="page">Fall 2026</a>
-                            <a href="#archived-courses">Archived</a>
-                        </nav>
-                        <a class="courses-add-button" href="#add-course"><i class="fa-solid fa-plus" aria-hidden="true"></i>Add course</a>
+                        <div class="semester-tabs" role="group" aria-label="Show courses">
+                            <button type="button" data-archived="false" aria-pressed="true">Active</button>
+                            <button type="button" data-archived="true" aria-pressed="false">Archived</button>
+                        </div>
+                        <button type="button" class="courses-add-button" id="add-course-button"><i class="fa-solid fa-plus" aria-hidden="true"></i>Add course</button>
                     </div>
                 </div>
 
-                <section class="course-grid" id="courses" aria-label="Fall 2026 courses">
-                    <article class="card course-card course-calculus" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Calculus II course details">
-                        <div class="course-card-top">
-                            <span class="course-code">MAT-201</span>
-                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-calculator"></i></span>
-                        </div>
-                        <h2>Calculus II</h2>
-                        <p class="course-instructor">Prof. Elena Marín</p>
-                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Mon and Wed, 9:00 to 11:00</p>
-                        <dl class="course-details">
-                            <div><dt>Current grade</dt><dd>84%</dd></div>
-                            <div><dt>Open tasks</dt><dd>3</dd></div>
-                            <div><dt>Next deadline</dt><dd>Problem set 4, 5 Oct</dd></div>
-                            <div><dt>Studied this week</dt><dd>3.5 h</dd></div>
-                        </dl>
-                        <div class="course-progress" role="img" aria-label="Current grade 84 percent"><span style="width: 84%;"></span></div>
-                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
-                        <ul class="course-assignment-source" hidden>
-                            <li><span>Problem set 4</span><time datetime="2026-10-05">5 Oct 2026</time></li>
-                            <li><span>Calculus II midterm</span><time datetime="2026-10-07">7 Oct 2026</time></li>
-                            <li><span>Calculus II problem set</span><time datetime="2026-10-26">26 Oct 2026</time></li>
-                        </ul>
-                    </article>
+                <form class="courses-filters" id="courses-filters" role="search">
+                    <div class="filter-field filter-search">
+                        <label for="course-search">Search</label>
+                        <input type="search" id="course-search" name="search" placeholder="Course name or code" maxlength="60" autocomplete="off">
+                    </div>
+                    <div class="filter-field">
+                        <label for="course-semester-filter">Semester</label>
+                        <select id="course-semester-filter" name="semester">
+                            <option value="">All semesters</option>
+                            <option value="fall-2026">Fall 2026</option>
+                            <option value="spring-2027">Spring 2027</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="filter-button">Search</button>
+                </form>
 
-                    <article class="card course-card course-data" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Data Structures course details">
-                        <div class="course-card-top">
-                            <span class="course-code">CS-210</span>
-                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
-                        </div>
-                        <h2>Data Structures</h2>
-                        <p class="course-instructor">Prof. Daniel Ortega</p>
-                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Wed 11:30 and Fri 9:00</p>
-                        <dl class="course-details">
-                            <div><dt>Current grade</dt><dd>92%</dd></div>
-                            <div><dt>Open tasks</dt><dd>2</dd></div>
-                            <div><dt>Next deadline</dt><dd>Milestone 1, 28 Oct</dd></div>
-                            <div><dt>Studied this week</dt><dd>4 h</dd></div>
-                        </dl>
-                        <div class="course-progress" role="img" aria-label="Current grade 92 percent"><span style="width: 92%;"></span></div>
-                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
-                        <ul class="course-assignment-source" hidden>
-                            <li><span>Data Structures milestone 1</span><time datetime="2026-10-28">28 Oct 2026</time></li>
-                        </ul>
-                    </article>
+                <p class="list-status" id="courses-status" role="status" hidden></p>
 
-                    <article class="card course-card course-physics" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Physics II course details">
-                        <div class="course-card-top">
-                            <span class="course-code">PHY-202</span>
-                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-atom"></i></span>
-                        </div>
-                        <h2>Physics II</h2>
-                        <p class="course-instructor">Prof. Sofia Lindqvist</p>
-                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Tue 10:00 and Thu lab 10:00</p>
-                        <dl class="course-details">
-                            <div><dt>Current grade</dt><dd>75%</dd></div>
-                            <div><dt>Open tasks</dt><dd>2</dd></div>
-                            <div><dt>Next deadline</dt><dd>Lab report, today</dd></div>
-                            <div><dt>Studied this week</dt><dd>2.5 h</dd></div>
-                        </dl>
-                        <div class="course-progress" role="img" aria-label="Current grade 75 percent"><span style="width: 75%;"></span></div>
-                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
-                        <ul class="course-assignment-source" hidden>
-                            <li><span>Physics II lab report</span><time datetime="2026-10-21">Due today</time></li>
-                        </ul>
-                    </article>
-
-                    <article class="card course-card course-economics" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="course-detail-dialog" aria-label="Open Microeconomics course details">
-                        <div class="course-card-top">
-                            <span class="course-code">ECO-101</span>
-                            <span class="course-color-mark" aria-hidden="true"><i class="fa-solid fa-chart-pie"></i></span>
-                        </div>
-                        <h2>Microeconomics</h2>
-                        <p class="course-instructor">Prof. Marcus Weber</p>
-                        <p class="course-meeting"><i class="fa-regular fa-clock" aria-hidden="true"></i>Tue 12:30 and Thu 15:00</p>
-                        <dl class="course-details">
-                            <div><dt>Current grade</dt><dd>86%</dd></div>
-                            <div><dt>Open tasks</dt><dd>3</dd></div>
-                            <div><dt>Next deadline</dt><dd>Quiz, 2 Oct</dd></div>
-                            <div><dt>Studied this week</dt><dd>1 h</dd></div>
-                        </dl>
-                        <div class="course-progress" role="img" aria-label="Current grade 86 percent"><span style="width: 86%;"></span></div>
-                        <div class="course-card-footer"><span>Fall 2026</span><span>Course overview</span></div>
-                        <ul class="course-assignment-source" hidden>
-                            <li><span>Microeconomics quiz</span><time datetime="2026-10-02">2 Oct 2026</time></li>
-                            <li><span>Microeconomics quiz</span><time datetime="2026-10-23">23 Oct 2026</time></li>
-                        </ul>
-                    </article>
-
-                    <article class="card add-course-card" id="add-course">
+                <section class="course-grid" id="courses" aria-label="Courses" aria-live="polite">
+                    <button type="button" class="card add-course-card" id="add-course">
                         <span class="add-course-icon"><i class="fa-solid fa-plus" aria-hidden="true"></i></span>
-                        <h2>Add a course</h2>
-                        <p>Name it, pick a colour, and add its class times.</p>
-                    </article>
+                        <span class="add-course-title">Add a course</span>
+                        <span class="add-course-text">Name it, pick a colour, and add its class times.</span>
+                    </button>
                 </section>
+
+                <dialog class="course-detail-dialog" id="course-form-dialog" aria-labelledby="course-form-title">
+                    <form class="course-detail-content entity-form" id="course-form" novalidate>
+                        <div class="course-detail-header">
+                            <h2 id="course-form-title">Add a course</h2>
+                            <button class="course-detail-close" type="button" data-close-dialog aria-label="Close course form">×</button>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="course-code">Code</label>
+                                <input id="course-code" name="code" type="text" required minlength="3" maxlength="10" pattern="[A-Za-z0-9\-]+" placeholder="MAT-201">
+                                <p class="field-error" data-error-for="code"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-name">Name</label>
+                                <input id="course-name" name="name" type="text" required maxlength="60" placeholder="Calculus II">
+                                <p class="field-error" data-error-for="name"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-instructor">Instructor</label>
+                                <input id="course-instructor" name="instructor" type="text" required maxlength="60" placeholder="Prof. Elena Marín">
+                                <p class="field-error" data-error-for="instructor"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-meeting-times">Class times <span>(optional)</span></label>
+                                <input id="course-meeting-times" name="meetingTimes" type="text" maxlength="80" placeholder="Mon and Wed, 9:00 to 11:00">
+                                <p class="field-error" data-error-for="meetingTimes"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-credits">Credits</label>
+                                <input id="course-credits" name="credits" type="number" required min="1" max="12" step="1" value="6">
+                                <p class="field-error" data-error-for="credits"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-semester">Semester</label>
+                                <select id="course-semester" name="semester" required>
+                                    <option value="fall-2026">Fall 2026</option>
+                                    <option value="spring-2027">Spring 2027</option>
+                                </select>
+                                <p class="field-error" data-error-for="semester"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="course-color">Colour</label>
+                                <select id="course-color" name="color" required>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="red">Red</option>
+                                    <option value="violet">Violet</option>
+                                </select>
+                                <p class="field-error" data-error-for="color"></p>
+                            </div>
+                            <div class="form-field form-check">
+                                <input id="course-archived" name="archived" type="checkbox">
+                                <label for="course-archived">Archived</label>
+                                <p class="field-error" data-error-for="archived"></p>
+                            </div>
+                        </div>
+                        <p class="form-error" role="alert"></p>
+                        <div class="popup-btns">
+                            <button type="button" class="reset-btn" data-close-dialog>Cancel</button>
+                            <button type="submit">Save course</button>
+                        </div>
+                    </form>
+                </dialog>
 
                 <dialog class="course-detail-dialog" id="course-detail-dialog" aria-labelledby="course-detail-title">
                     <div class="course-detail-content">
@@ -185,20 +183,61 @@
                                 <span class="course-code" id="course-detail-code"></span>
                                 <h2 id="course-detail-title"></h2>
                             </div>
-                            <button class="course-detail-close" type="button" aria-label="Close course details">×</button>
+                            <button class="course-detail-close" type="button" data-close-dialog aria-label="Close course details">×</button>
                         </div>
                         <p class="course-detail-instructor" id="course-detail-instructor"></p>
                         <p class="course-detail-meeting" id="course-detail-meeting"></p>
                         <div id="course-detail-summary"></div>
+
+                        <h3>Grades</h3>
+                        <p class="list-status" id="grades-status" role="status" hidden></p>
+                        <ul class="grade-list" id="course-detail-grades" aria-live="polite"></ul>
+                        <form class="grade-form entity-form" id="grade-form" novalidate>
+                            <h4 id="grade-form-title">Add a grade</h4>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="grade-title">Title</label>
+                                    <input id="grade-title" name="title" type="text" required maxlength="80" placeholder="Midterm">
+                                    <p class="field-error" data-error-for="title"></p>
+                                </div>
+                                <div class="form-field">
+                                    <label for="grade-type">Type</label>
+                                    <select id="grade-type" name="type" required>
+                                        <option value="exam">Exam</option>
+                                        <option value="assignment">Assignment</option>
+                                        <option value="project">Project</option>
+                                        <option value="quiz">Quiz</option>
+                                    </select>
+                                    <p class="field-error" data-error-for="type"></p>
+                                </div>
+                                <div class="form-field">
+                                    <label for="grade-score">Score (%)</label>
+                                    <input id="grade-score" name="score" type="number" required min="0" max="100" step="any">
+                                    <p class="field-error" data-error-for="score"></p>
+                                </div>
+                                <div class="form-field">
+                                    <label for="grade-weight">Weight (%)</label>
+                                    <input id="grade-weight" name="weight" type="number" required min="0" max="100" step="any">
+                                    <p class="field-error" data-error-for="weight"></p>
+                                </div>
+                                <div class="form-field">
+                                    <label for="grade-date">Date</label>
+                                    <input id="grade-date" name="date" type="date" required>
+                                    <p class="field-error" data-error-for="date"></p>
+                                </div>
+                            </div>
+                            <p class="field-error" data-error-for="courseId"></p>
+                            <p class="form-error" role="alert"></p>
+                            <div class="popup-btns">
+                                <button type="button" class="reset-btn" id="grade-cancel-edit" hidden>Cancel edit</button>
+                                <button type="submit">Save grade</button>
+                            </div>
+                        </form>
+
                         <h3>Assignments and deadlines</h3>
                         <ol class="course-assignment-list" id="course-detail-assignments"></ol>
                     </div>
                 </dialog>
-
-                <section class="archived-courses" id="archived-courses" aria-label="Archived courses">
-                    <h2>Archived courses</h2>
-                    <p>No archived courses yet.</p>
-                </section>
             </main>
         </div>
     </div>

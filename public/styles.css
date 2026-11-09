@@ -3182,3 +3182,370 @@ main {
         padding: 10px;
     }
 }
+
+/* ===================================================================
+   API-DRIVEN UI (Practice 1)
+   Status messages, forms with field errors, course colours, filters,
+   card actions and grades. Uses the same tokens as the rest of the site.
+   =================================================================== */
+
+/* Course colours: one class per value of the API's closed set. */
+.color-blue {
+    --course-color: var(--blue);
+    --course-background: var(--blue-soft);
+}
+
+.color-green {
+    --course-color: var(--green);
+    --course-background: var(--green-soft);
+}
+
+.color-red {
+    --course-color: var(--red);
+    --course-background: var(--red-soft);
+}
+
+.color-violet {
+    --course-color: var(--violet);
+    --course-background: var(--violet-soft);
+}
+
+/* Dialogs: "* { margin: 0 }" removes the browser's margin: auto, which centres a modal <dialog>. */
+dialog.course-detail-dialog {
+    margin: auto;
+}
+
+/* Loading / error / empty messages */
+.list-status {
+    padding: 12px 0;
+    color: var(--gray);
+}
+
+.list-status[data-state="error"] {
+    padding: 10px 12px;
+    background-color: var(--red-soft);
+    color: var(--red);
+    font-weight: 500;
+}
+
+.list-status[hidden] {
+    display: none;
+}
+
+/* Forms: fields, errors next to each field */
+.entity-form .field-error,
+.entity-form .form-error {
+    color: var(--red);
+    font-size: .7rem;
+    font-weight: 500;
+}
+
+.entity-form .field-error:empty,
+.entity-form .form-error:empty {
+    display: none;
+}
+
+.entity-form [aria-invalid="true"] {
+    border-color: var(--red);
+    outline-color: var(--red);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.form-field label {
+    font-weight: 500;
+}
+
+.form-field label span {
+    color: var(--gray);
+    font-size: .7rem;
+    font-weight: 400;
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    background-color: var(--cream);
+    color: var(--text);
+    font: inherit;
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+}
+
+.form-check {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: end;
+    gap: 8px;
+    padding-bottom: 9px;
+}
+
+.form-check input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--navy);
+}
+
+.form-check .field-error {
+    flex-basis: 100%;
+}
+
+.entity-form button:disabled {
+    cursor: wait;
+    opacity: .6;
+}
+
+/* Courses page: Active / Archived tabs, filters, cards */
+.semester-tabs button {
+    padding: 8px 12px;
+    background-color: var(--white);
+    color: var(--gray);
+    font: inherit;
+    font-weight: 400;
+}
+
+.semester-tabs button + button {
+    border-left: 1px solid var(--line);
+}
+
+.semester-tabs button[aria-pressed="true"] {
+    background-color: var(--navy);
+    color: var(--cream);
+}
+
+.semester-tabs button:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.courses-add-button {
+    font: inherit;
+    font-weight: 600;
+}
+
+.courses-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 14px;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.filter-field label {
+    color: var(--gray);
+    font-size: .7rem;
+    font-weight: 500;
+}
+
+.filter-search {
+    flex: 1 1 240px;
+    max-width: 360px;
+}
+
+.filter-field input,
+.filter-field select {
+    padding: 8px 10px;
+    border: 1px solid var(--line-strong);
+    background-color: var(--white);
+    color: var(--text);
+    font: inherit;
+}
+
+.filter-field input:focus-visible,
+.filter-field select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+}
+
+.filter-button {
+    padding: 9px 17px;
+    font: inherit;
+    font-weight: 600;
+}
+
+.course-card-footer {
+    align-items: center;
+}
+
+.course-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.text-button {
+    padding: 3px 7px;
+    background-color: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.text-button:hover {
+    background-color: var(--blue-soft);
+    box-shadow: none;
+    filter: none;
+    transform: none;
+}
+
+.text-button.danger {
+    color: var(--red);
+}
+
+.text-button.danger:hover {
+    background-color: var(--red-soft);
+}
+
+.text-button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+}
+
+button.add-course-card {
+    width: 100%;
+    padding: 15px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.add-course-title {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.add-course-text {
+    max-width: 260px;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+/* Grades in the course detail dialog */
+.grade-list {
+    display: grid;
+    margin: 0;
+}
+
+.grade-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.grade-item div:first-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.grade-item div:first-child span {
+    color: var(--gray);
+    font-size: .7rem;
+}
+
+.grade-score {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.grade-form {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    background-color: var(--cream);
+}
+
+.grade-form h4 {
+    font-size: .8rem;
+}
+
+.grade-form .form-field input,
+.grade-form .form-field select {
+    background-color: var(--white);
+}
+
+/* Tasks: due date + edit/delete buttons, completed "undo" button */
+.task-row-end {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.task-row-end .task-due {
+    margin-right: 6px;
+}
+
+.task-icon-button {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    padding: 0;
+    background: transparent;
+    color: var(--gray);
+    font-size: .75rem;
+}
+
+.task-icon-button:hover {
+    background-color: var(--blue-soft);
+    box-shadow: none;
+    color: var(--navy);
+    filter: none;
+    transform: none;
+}
+
+.task-icon-button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.add-popup .field-error,
+.add-popup .form-error {
+    margin-top: 2px;
+}
+
+@media (max-width: 462px) {
+    .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .grade-item {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .grade-item .course-card-actions {
+        grid-column: 1 / -1;
+    }
+
+    .filter-search {
+        max-width: none;
+    }
+}
