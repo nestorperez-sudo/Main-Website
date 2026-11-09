@@ -13,7 +13,11 @@ npm install
 npm start          -> open http://localhost:3000
 ```
 
-Data lives in memory: restarting the server resets it to the seed data.
+While developing, `npm run dev` does the same but restarts the server whenever a file changes (Node 18.11+; each restart resets the data).
+
+Open the site from the server at `http://localhost:3000`, not by double-clicking an HTML file or with a "live server" extension: the pages call the API on the same origin.
+
+Data lives in memory: restarting the server resets it to the seed data. Seed dates are relative to the day the server starts, so there is always something on today's dashboard and schedule.
 
 ## Resources
 
@@ -156,7 +160,631 @@ Common behaviour:
 - An `:id` that does not exist (or is not a number) returns `404 { "error": "Not found" }`.
 - Unknown routes return `404 { "error": "Not found" }`. Unexpected errors return `500 { "error": "Internal server error" }`, never a stack trace.
 
-Example requests and responses: _to be completed._
+### Example requests and responses
+
+One example per endpoint, recorded from a freshly started server (dates depend on the day it runs). Click a resource to open its examples.
+
+<details>
+<summary><strong>Courses (main resource)</strong></summary>
+
+**GET /api/courses?search=calc&semester=fall-2026&archived=false** → `200`
+
+Response:
+```json
+[
+  {"id":1,"code":"MAT-201","name":"Calculus II","instructor":"Prof. Elena Marín","meetingTimes":"Mon and Wed, 9:00 to 11:00","credits":6,"semester":"fall-2026","color":"blue","archived":false}
+]
+```
+
+**GET /api/courses?semester=winter&archived=maybe** → `400`
+
+Response:
+```json
+{
+  "errors": [{"field":"semester","message":"Must be one of: fall-2026, spring-2027."},{"field":"archived","message":"Must be true or false."}]
+}
+```
+
+**GET /api/courses/stats** → `200`
+
+Response:
+```json
+{
+  "total": 6,
+  "active": 5,
+  "archived": 1,
+  "totalCredits": 33,
+  "averageGrade": 84.3,
+  "bySemester": {"fall-2026":5,"spring-2027":1}
+}
+```
+
+**GET /api/courses/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "code": "MAT-201",
+  "name": "Calculus II",
+  "instructor": "Prof. Elena Marín",
+  "meetingTimes": "Mon and Wed, 9:00 to 11:00",
+  "credits": 6,
+  "semester": "fall-2026",
+  "color": "blue",
+  "archived": false
+}
+```
+
+**POST /api/courses** → `201`, `Location: /api/courses/7`
+
+Request body:
+```json
+{
+  "code": "HIS-110",
+  "name": "Economic History",
+  "instructor": "Prof. Clara Ruiz",
+  "meetingTimes": "Fri 10:00 to 12:00",
+  "credits": 4,
+  "semester": "fall-2026",
+  "color": "red"
+}
+```
+Response:
+```json
+{
+  "id": 7,
+  "code": "HIS-110",
+  "name": "Economic History",
+  "instructor": "Prof. Clara Ruiz",
+  "meetingTimes": "Fri 10:00 to 12:00",
+  "credits": 4,
+  "semester": "fall-2026",
+  "color": "red",
+  "archived": false
+}
+```
+
+**PUT /api/courses/7** → `200`
+
+Request body:
+```json
+{
+  "code": "HIS-110",
+  "name": "Economic History of Europe",
+  "instructor": "Prof. Clara Ruiz",
+  "credits": 6,
+  "semester": "spring-2027",
+  "color": "violet",
+  "archived": true
+}
+```
+Response:
+```json
+{
+  "id": 7,
+  "code": "HIS-110",
+  "name": "Economic History of Europe",
+  "instructor": "Prof. Clara Ruiz",
+  "meetingTimes": null,
+  "credits": 6,
+  "semester": "spring-2027",
+  "color": "violet",
+  "archived": true
+}
+```
+
+**DELETE /api/courses/7** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Tasks</strong></summary>
+
+**GET /api/tasks** → `200`
+
+Response (first 2 of 7 items):
+```json
+[
+  {"id":1,"title":"Physics II lab report","courseId":3,"type":"assignment","priority":"high","dueDate":"2026-11-10","dueTime":"23:59","reminder":"1-day","description":"Write up the pendulum experiment.","completed":false},
+  {"id":2,"title":"Review calculus chapters 4–5","courseId":1,"type":"study","priority":"high","dueDate":"2026-11-11","dueTime":null,"reminder":"none","description":null,"completed":false}
+]
+```
+
+**GET /api/tasks/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "title": "Physics II lab report",
+  "courseId": 3,
+  "type": "assignment",
+  "priority": "high",
+  "dueDate": "2026-11-10",
+  "dueTime": "23:59",
+  "reminder": "1-day",
+  "description": "Write up the pendulum experiment.",
+  "completed": false
+}
+```
+
+**POST /api/tasks** → `201`, `Location: /api/tasks/8`
+
+Request body:
+```json
+{
+  "title": "Read chapter 5",
+  "courseId": 1,
+  "type": "reading",
+  "priority": "medium",
+  "dueDate": "2026-12-01"
+}
+```
+Response:
+```json
+{
+  "id": 8,
+  "title": "Read chapter 5",
+  "courseId": 1,
+  "type": "reading",
+  "priority": "medium",
+  "dueDate": "2026-12-01",
+  "dueTime": null,
+  "reminder": "none",
+  "description": null,
+  "completed": false
+}
+```
+
+**PUT /api/tasks/8** → `200`
+
+Request body:
+```json
+{
+  "title": "Read chapters 5 and 6",
+  "courseId": 1,
+  "type": "reading",
+  "priority": "high",
+  "dueDate": "2026-12-02",
+  "dueTime": "18:00",
+  "reminder": "1-day",
+  "description": "Take notes",
+  "completed": false
+}
+```
+Response:
+```json
+{
+  "id": 8,
+  "title": "Read chapters 5 and 6",
+  "courseId": 1,
+  "type": "reading",
+  "priority": "high",
+  "dueDate": "2026-12-02",
+  "dueTime": "18:00",
+  "reminder": "1-day",
+  "description": "Take notes",
+  "completed": false
+}
+```
+
+**DELETE /api/tasks/8** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Events</strong></summary>
+
+**GET /api/events** → `200`
+
+Response (first 2 of 7 items):
+```json
+[
+  {"id":1,"title":"Calculus II lecture","type":"class","date":"2026-11-10","startTime":"09:00","endTime":"11:00","location":"Room 204","courseId":1},
+  {"id":2,"title":"Calculus II study session","type":"study","date":"2026-11-10","startTime":"11:30","endTime":"13:00","location":"Library, Study Room 3","courseId":1}
+]
+```
+
+**GET /api/events/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "title": "Calculus II lecture",
+  "type": "class",
+  "date": "2026-11-10",
+  "startTime": "09:00",
+  "endTime": "11:00",
+  "location": "Room 204",
+  "courseId": 1
+}
+```
+
+**POST /api/events** → `201`, `Location: /api/events/8`
+
+Request body:
+```json
+{
+  "title": "Office hours",
+  "type": "class",
+  "date": "2026-12-01",
+  "startTime": "11:00",
+  "endTime": "12:00",
+  "location": "Room 3",
+  "courseId": 2
+}
+```
+Response:
+```json
+{
+  "id": 8,
+  "title": "Office hours",
+  "type": "class",
+  "date": "2026-12-01",
+  "startTime": "11:00",
+  "endTime": "12:00",
+  "location": "Room 3",
+  "courseId": 2
+}
+```
+
+**PUT /api/events/8** → `200`
+
+Request body:
+```json
+{
+  "title": "Office hours (moved)",
+  "type": "class",
+  "date": "2026-12-02",
+  "startTime": "12:00",
+  "endTime": "13:00",
+  "location": "Room 5",
+  "courseId": 2
+}
+```
+Response:
+```json
+{
+  "id": 8,
+  "title": "Office hours (moved)",
+  "type": "class",
+  "date": "2026-12-02",
+  "startTime": "12:00",
+  "endTime": "13:00",
+  "location": "Room 5",
+  "courseId": 2
+}
+```
+
+**DELETE /api/events/8** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Study sessions</strong></summary>
+
+**GET /api/study-sessions** → `200`
+
+Response (first 2 of 10 items):
+```json
+[
+  {"id":1,"courseId":1,"date":"2026-11-10","minutes":90,"done":true,"notes":"Chapter 4 exercises"},
+  {"id":2,"courseId":3,"date":"2026-11-10","minutes":60,"done":true,"notes":null}
+]
+```
+
+**GET /api/study-sessions/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "courseId": 1,
+  "date": "2026-11-10",
+  "minutes": 90,
+  "done": true,
+  "notes": "Chapter 4 exercises"
+}
+```
+
+**POST /api/study-sessions** → `201`, `Location: /api/study-sessions/11`
+
+Request body:
+```json
+{
+  "courseId": 4,
+  "date": "2026-12-01",
+  "minutes": 45,
+  "notes": "Elasticity exercises"
+}
+```
+Response:
+```json
+{
+  "id": 11,
+  "courseId": 4,
+  "date": "2026-12-01",
+  "minutes": 45,
+  "done": false,
+  "notes": "Elasticity exercises"
+}
+```
+
+**PUT /api/study-sessions/11** → `200`
+
+Request body:
+```json
+{
+  "courseId": 4,
+  "date": "2026-12-01",
+  "minutes": 60,
+  "done": true,
+  "notes": "Elasticity exercises"
+}
+```
+Response:
+```json
+{
+  "id": 11,
+  "courseId": 4,
+  "date": "2026-12-01",
+  "minutes": 60,
+  "done": true,
+  "notes": "Elasticity exercises"
+}
+```
+
+**DELETE /api/study-sessions/11** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Grades</strong></summary>
+
+**GET /api/grades** → `200`
+
+Response (first 2 of 8 items):
+```json
+[
+  {"id":1,"courseId":1,"title":"Problem set 1","score":80,"weight":10,"type":"assignment","date":"2026-09-28"},
+  {"id":2,"courseId":1,"title":"Problem set 2","score":88,"weight":10,"type":"assignment","date":"2026-10-19"}
+]
+```
+
+**GET /api/grades/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "courseId": 1,
+  "title": "Problem set 1",
+  "score": 80,
+  "weight": 10,
+  "type": "assignment",
+  "date": "2026-09-28"
+}
+```
+
+**POST /api/grades** → `201`, `Location: /api/grades/9`
+
+Request body:
+```json
+{
+  "courseId": 1,
+  "title": "Midterm",
+  "score": 91.5,
+  "weight": 30,
+  "type": "exam",
+  "date": "2026-11-18"
+}
+```
+Response:
+```json
+{
+  "id": 9,
+  "courseId": 1,
+  "title": "Midterm",
+  "score": 91.5,
+  "weight": 30,
+  "type": "exam",
+  "date": "2026-11-18"
+}
+```
+
+**PUT /api/grades/9** → `200`
+
+Request body:
+```json
+{
+  "courseId": 1,
+  "title": "Midterm (revised)",
+  "score": 93,
+  "weight": 30,
+  "type": "exam",
+  "date": "2026-11-18"
+}
+```
+Response:
+```json
+{
+  "id": 9,
+  "courseId": 1,
+  "title": "Midterm (revised)",
+  "score": 93,
+  "weight": 30,
+  "type": "exam",
+  "date": "2026-11-18"
+}
+```
+
+**DELETE /api/grades/9** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Users</strong></summary>
+
+**GET /api/users** → `200`
+
+Response:
+```json
+[
+  {"id":1,"name":"Alex Lopez","email":"alex@example.com","university":null,"degree":null,"weeklyGoal":15,"dailyGoal":3,"theme":"light","language":"en"}
+]
+```
+
+**GET /api/users/1** → `200`
+
+Response:
+```json
+{
+  "id": 1,
+  "name": "Alex Lopez",
+  "email": "alex@example.com",
+  "university": null,
+  "degree": null,
+  "weeklyGoal": 15,
+  "dailyGoal": 3,
+  "theme": "light",
+  "language": "en"
+}
+```
+
+**POST /api/users** → `201`, `Location: /api/users/2`
+
+Request body:
+```json
+{
+  "name": "Pablo Laguna",
+  "email": "pablo@example.com"
+}
+```
+Response:
+```json
+{
+  "id": 2,
+  "name": "Pablo Laguna",
+  "email": "pablo@example.com",
+  "university": null,
+  "degree": null,
+  "weeklyGoal": 15,
+  "dailyGoal": 2,
+  "theme": "system",
+  "language": "en"
+}
+```
+
+**PUT /api/users/2** → `200`
+
+Request body:
+```json
+{
+  "name": "Pablo Laguna",
+  "email": "pablo@example.com",
+  "university": "CUNEF Universidad",
+  "degree": "Data Science, year 2",
+  "weeklyGoal": 20,
+  "dailyGoal": 4,
+  "theme": "dark",
+  "language": "es"
+}
+```
+Response:
+```json
+{
+  "id": 2,
+  "name": "Pablo Laguna",
+  "email": "pablo@example.com",
+  "university": "CUNEF Universidad",
+  "degree": "Data Science, year 2",
+  "weeklyGoal": 20,
+  "dailyGoal": 4,
+  "theme": "dark",
+  "language": "es"
+}
+```
+
+**DELETE /api/users/2** → `204`
+
+No response body.
+
+</details>
+
+<details>
+<summary><strong>Errors (same shape for every resource)</strong></summary>
+
+**POST /api/courses** → `400`
+
+Request body:
+```json
+{
+  "code": "M@T 1",
+  "name": "",
+  "instructor": 42,
+  "credits": 20,
+  "semester": "winter-2026",
+  "color": "orange",
+  "archived": "yes"
+}
+```
+Response:
+```json
+{
+  "errors": [{"field":"code","message":"Use only letters, numbers and hyphens (e.g. MAT-201)."},{"field":"name","message":"This field is required."},{"field":"instructor","message":"Must be text."},{"field":"credits","message":"Must be between 1 and 12."},{"field":"semester","message":"Must be one of: fall-2026, spring-2027."},{"field":"color","message":"Must be one of: blue, green, red, violet."},{"field":"archived","message":"Must be true or false."}]
+}
+```
+
+**POST /api/tasks** → `400`
+
+Request body:
+```json
+{
+  "title": "Ghost task",
+  "courseId": 99,
+  "type": "exam",
+  "priority": "low",
+  "dueDate": "2026-12-01"
+}
+```
+Response:
+```json
+{
+  "errors": [{"field":"courseId","message":"No course with this id."}]
+}
+```
+
+**GET /api/courses/999** → `404`
+
+Response:
+```json
+{
+  "error": "Not found"
+}
+```
+
+**GET /api/nothing-here** → `404`
+
+Response:
+```json
+{
+  "error": "Not found"
+}
+```
+
+</details>
 
 ## Postman
 
@@ -183,13 +811,33 @@ The collection variable `baseUrl` is `http://localhost:3000/api`. Each request h
 
 ## Front end
 
-_To be completed._
+Express serves the pages from `public/`. `public/js/api.js` holds `apiRequest(method, path, body)`, the only place that calls `fetch`. It checks `response.ok` and throws an error carrying the server's `errors` list. `public/js/ui.js` has the shared helpers: loading / error / empty messages, errors shown next to each field, and dates. Each page has its own script:
+
+| Page | Script | Endpoints it calls |
+| --- | --- | --- |
+| `index.html` (dashboard) | `dashboard.js`, `tasks.js` | `GET /api/users`, `/api/courses`, `/api/tasks`, `/api/events`, `/api/study-sessions`, `/api/grades`; `PUT /api/tasks/:id` (tick a priority task); `POST /api/tasks` (Add-task popup) |
+| `courses.html` | `courses.js` | `GET /api/courses?search=&semester=&archived=` (search box, semester select, Active/Archived tabs); `GET /api/courses/stats` (summary under the heading); `POST`, `PUT`, `DELETE /api/courses`; `GET /api/tasks`, `GET /api/grades` (card details); `POST`, `PUT`, `DELETE /api/grades` (detail dialog) |
+| `tasks.html` | `tasks.js` | `GET /api/tasks`, `GET /api/courses` (course names, course select); `POST /api/tasks` (popup); `PUT /api/tasks/:id` (edit, tick as done); `DELETE /api/tasks/:id` |
+| `schedule.html` | `schedule.js` | `GET /api/events`, `GET /api/courses`; `POST`, `PUT`, `DELETE /api/events` |
+| `statistics.html` | `statistics.js` | `GET /api/users` (weekly goal), `/api/courses`, `/api/tasks`, `/api/study-sessions`; `POST`, `PUT`, `DELETE /api/study-sessions` |
+| `settings.html` | `settings.js` | `GET /api/users`; `PUT /api/users/:id` (Save changes); `DELETE /api/users/:id` (Delete account) |
+| `login.html` | `login.js` | `POST /api/users` (sign-up). Sign-in is a prototype: the brief does not require authentication. |
+
+`main.js` runs on every app page and has no API calls: sidebar, popup open/close, notifications popover and the Weekly/Daily switch.
+
+Lists that are not resources are fixed `<select>` lists or buttons in the HTML, using exactly the values the validators accept: task type, priority and reminder; course semester and colour; event type; grade type; theme and language. Courses are a resource, so every course select is filled from `GET /api/courses`.
+
+Without login, the app treats the first user as "you" (dashboard greeting, weekly goal, settings). Study streak, grade trend, insights, the activity heatmap and the dashboard mini calendar are still static decoration.
 
 ## Design decisions
 
 - **Invalid query parameters are rejected with `400`, not ignored.** If `?archived=yes` were ignored, the client would get every course and believe the filter worked. A `400` with the same `{ errors }` shape as the validators makes the mistake visible. Query parameters the API does not know are ignored.
 - **`express.static` is mounted in `app.js` after the logger and JSON parser and before the `/api` routers.** Page requests are logged like API calls. Pages and API never share a path (`/courses.html` vs `/api/courses`), so the order between them does not change behaviour. Both come before the JSON 404 and the error handler, which must be last.
 - **Searching and filtering happen on the server.** The client only sends the query string and shows what comes back. The browser never has to download every item to filter it, and the rule for what matches lives in one place that every client (the pages, Postman) shares.
+- **Validators check shape; controllers check that `courseId` exists.** A validator only looks at the request body. Whether a course with that id exists depends on the stored data, so the controller checks it (`controllers/courseCheck.js`) and adds the problem to the same error list, so every error still comes back at once.
+- **Deleting a course deletes its tasks, events, study sessions and grades.** Otherwise those items would point to a course that no longer exists.
+- **The store hands out copies.** `store.js` returns copies of its objects, so a controller can't change stored data by accident. Only the store's functions change the arrays, which is what lets a database replace it later.
+- **`PUT` replaces the whole item.** It runs the same validator as `POST`, so optional fields that are left out go back to their defaults.
 
 ## AI
 
