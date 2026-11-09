@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const logger = require("./middleware/logger");
+const coursesRouter = require("./routes/courses");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 // 4. API routers, one per resource, all under /api/<resource>.
+app.use("/api/courses", coursesRouter);
 
 // 5. Anything not matched above: JSON 404.
 app.use((req, res) => {
