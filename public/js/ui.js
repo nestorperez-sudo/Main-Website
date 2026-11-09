@@ -93,11 +93,31 @@ function parseLocalDate(isoDate) {
     return new Date(year, month - 1, day);
 }
 
-function todayISO() {
-    const now = new Date();
+// Date object -> "YYYY-MM-DD" in local time.
+function toISODate(date) {
     const pad = (number) => String(number).padStart(2, "0");
-    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
+
+const todayISO = () => toISODate(new Date());
+
+// "YYYY-MM-DD" plus a number of days -> "YYYY-MM-DD".
+function addDays(isoDate, days) {
+    const date = parseLocalDate(isoDate);
+    date.setDate(date.getDate() + days);
+    return toISODate(date);
+}
+
+// The 7 dates of the current week, Monday to Sunday.
+function currentWeekDates() {
+    const today = todayISO();
+    const daysSinceMonday = (parseLocalDate(today).getDay() + 6) % 7; // getDay(): Sunday = 0
+    const monday = addDays(today, -daysSinceMonday);
+    return [0, 1, 2, 3, 4, 5, 6].map((offset) => addDays(monday, offset));
+}
+
+// 90 -> "1.5 h"
+const formatHours = (minutes) => `${Math.round(minutes / 6) / 10} h`;
 
 // "2026-11-09" -> "Mon, 9 Nov"
 function formatShortDate(isoDate) {

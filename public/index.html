@@ -11,6 +11,7 @@
     <script src="js/api.js" defer></script>
     <script src="js/ui.js" defer></script>
     <script src="js/tasks.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -76,7 +77,7 @@
             </header>
             <main>
                 <div class="welcome-section">
-                    <h1>Hello, Alex<span class="dot" style="color: var(--gold);">.</span></h1>
+                    <h1>Hello, <span id="dash-user-name">there</span><span class="dot" style="color: var(--gold);">.</span></h1>
                     <div class="date-block">
                         <div style="height: fit-content;">
                             <span class="day-number">10</span>
@@ -85,6 +86,7 @@
                         <span class="year">2026</span>
                     </div>
                 </div>
+                <p class="list-status" id="dash-status" role="status" hidden></p>
                 <div class="coming-up">
                     <h1>Coming up</h1>
                     <button class="items-plan">4 items to plan</button>
@@ -93,65 +95,30 @@
                     <article class="card">
                         <div class="card-header">
                             <span>Today</span>
-                            <span class="count">Thu, 1 Oct</span>
+                            <span class="count" id="dash-today-date"></span>
                         </div>
-                        
-                        <div class="card-body-column">
-                            <div class="card-slot-time" style="background-color: var(--red-soft); border-left: 3px solid var(--red);">
-                                <p>10:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II Lab</h3>
-                                    <p>Lab 2, building</p>
-                                </div>
-                            </div>
-                            <div class="card-slot-time" style="background-color: var(--blue-soft); border-left: 3px solid var(--blue);">
-                                <p>10:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II Lab</h3>
-                                    <p>Lab 2, building</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="card-body-column" id="dash-today-events"></div>
                     </article>
-
                     <article class="card">
                         <div class="card-header">
                             <span>Tomorrow</span>
-                            <span class="count">Wed, Sep 11</span>
+                            <span class="count" id="dash-tomorrow-date"></span>
                         </div>
-
-                        <div class="card-body-column">
-                            <div class="card-slot-time" style="background-color: var(--green-soft); border-left: 3px solid var(--green);">
-                                <p>10:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II Lab</h3>
-                                    <p>Lab 2, building</p>
-                                </div>
-                            </div>
-                            <div class="card-slot-time" style="background-color: var(--violet-soft); border-left: 3px solid var(--violet);">
-                                <p>10:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II Lab</h3>
-                                    <p>Lab 2, building</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="card-body-column" id="dash-tomorrow-events"></div>
                     </article>
-
                     <article class="card study-reminder">
                         <div class="card-header">
                             <span style="color: var(--gold);">Study reminder</span>
-                            <span class="count" style="color: var(--line-strong)">Exam in 6 days</span>
+                            <span class="count" style="color: var(--line-strong)" id="dash-exam-countdown"></span>
                         </div>
-
                         <div class="card-body-reminder">
                             <div>
-                                <h3>Calculus II Midterm</h3>
-                                <p>Wednesday, 7 October at 9:00</p>
+                                <h3 id="dash-exam-title"></h3>
+                                <p id="dash-exam-date"></p>
                             </div>
-                            <div>
-                                <div class="progress-bar"><div style="background-color: var(--gold); width: 40%; height: 100%;"></div></div>
-                                <p style="margin-top: 5px;">2 out of 5 study sessions done</p>
+                            <div id="dash-exam-progress-block">
+                                <div class="progress-bar"><div id="dash-exam-progress" style="background-color: var(--gold); width: 0%; height: 100%;"></div></div>
+                                <p style="margin-top: 5px;" id="dash-exam-sessions"></p>
                             </div>
                             <button style="background-color: var(--gold); color: var(--navy);">Plan sessions</button>
                         </div>
@@ -163,63 +130,15 @@
                             <span class="card-title">Today's schedule</span>
                             <a href="schedule.html" class="golden-description">Open week</a>
                         </div>
-                        <div class="card-body-column schedule-list">
-                            <div class="card-slot-time schedule-item">
-                                <p class="schedule-time">09:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II lecture</h3>
-                                    <p>Science Hall, Room 204</p>
-                                </div>
-                                <span class="schedule-category">Class</span>
-                            </div>
-                            <div class="card-slot-time schedule-item">
-                                <p class="schedule-time">11:30</p>
-                                <div class="card-slot-description">
-                                    <h3>Calculus II study session</h3>
-                                    <p>Library, Study Room 3</p>
-                                </div>
-                                <span class="schedule-category">Study</span>
-                            </div>
-                            <div class="card-slot-time schedule-item">
-                                <p class="schedule-time">14:00</p>
-                                <div class="card-slot-description">
-                                    <h3>Physics II Lab</h3>
-                                    <p>Lab 2, Science Building</p>
-                                </div>
-                                <span class="schedule-category">Class</span>
-                            </div>
-                        </div>
+                        <div class="card-body-column schedule-list" id="dash-schedule-list"></div>
                     </article>
-
                     <article class="card priority">
                         <div class="card-header">
                             <span class="card-title">Priority tasks</span>
-                            <span class="golden-description">2 items</span>
+                            <span class="golden-description" id="dash-priority-count"></span>
                         </div>
-                        <ul class="priority-task-list">
-                            <li class="priority-task">
-                                <input class="priority-checkbox" id="priority-physics-report" type="checkbox" aria-label="Mark Finish Physics II lab report complete">
-                                <div class="priority-task-content">
-                                    <label class="priority-task-title" for="priority-physics-report">Finish Physics II lab report</label>
-                                    <p class="priority-course"><span class="priority-indicator physics-indicator" aria-hidden="true"></span>Physics II</p>
-                                    <p class="priority-due"><i class="fa-regular fa-clock" aria-hidden="true"></i>Today, 23:59</p>
-                                </div>
-                                <span class="priority-level priority-high">High</span>
-                                <button class="priority-more" type="button" aria-label="More options for Finish Physics II lab report"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></button>
-                            </li>
-                            <li class="priority-task">
-                                <input class="priority-checkbox" id="priority-calculus-review" type="checkbox" aria-label="Mark Review calculus chapters 4–5 complete">
-                                <div class="priority-task-content">
-                                    <label class="priority-task-title" for="priority-calculus-review">Review calculus chapters 4–5</label>
-                                    <p class="priority-course"><span class="priority-indicator calculus-indicator" aria-hidden="true"></span>Calculus II</p>
-                                    <p class="priority-due"><i class="fa-regular fa-clock" aria-hidden="true"></i>Tomorrow</p>
-                                </div>
-                                <span class="priority-level priority-high">High</span>
-                                <button class="priority-more" type="button" aria-label="More options for Review calculus chapters 4–5"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></button>
-                            </li>
-                        </ul>
+                        <ul class="priority-task-list" id="dash-priority-list" aria-live="polite"></ul>
                     </article>
-
                     <article class="card calendar-card-title">
                         <div class="card-header">
                             <span class="card-title">October 2026</span>
@@ -275,38 +194,15 @@
                             </div>
                         </div>
                     </article>
-
                     <article class="card statistics">
                         <div class="card-header">
                             <span class="card-title">Weekly statistics</span>
                             <a href="statistics.html" class="golden-description">Full statistics</a>
                         </div>
                         <div class="card-body">
-                            <h1 style="margin-bottom: 5px;">9h <span style="font-size: .85rem; color: var(--gray); font-weight: 500;">studied of your 15h goal</span></h1>
-                            <div class="progress-bar"><div style="background-color: var(--gold); width: 60%; height: 100%;"></div></div>
-                            <div class="chart">
-                                <div class="bar" style="--value: 80">
-                                    <span>Mon</span>
-                                </div>
-                                <div class="bar" style="--value: 55">
-                                    <span>Tue</span>
-                                </div>
-                                <div class="bar" style="--value: 90">
-                                    <span>Wed</span>
-                                </div>
-                                <div class="bar" style="--value: 40">
-                                    <span>Thu</span>
-                                </div>
-                                <div class="bar bar-active" style="--value: 85">
-                                    <span>Fri</span>
-                                </div>
-                                <div class="bar" style="--value: 10">
-                                    <span>Sat</span>
-                                </div>
-                                <div class="bar" style="--value: 100">
-                                    <span>Sun</span>
-                                </div>
-                            </div>
+                            <h1 style="margin-bottom: 5px;"><span id="dash-week-hours">0 h</span> <span style="font-size: .85rem; color: var(--gray); font-weight: 500;" id="dash-week-goal">studied this week</span></h1>
+                            <div class="progress-bar"><div id="dash-week-progress" style="background-color: var(--gold); width: 0%; height: 100%;"></div></div>
+                            <div class="chart" id="dash-week-chart"></div>
                         </div>
                     </article>
                 </section>
@@ -314,68 +210,7 @@
                     <span class="card-title">Your courses</span>
                     <a href="courses.html" class="golden-description">Manage courses</a>
                 </div>
-                <div class="courses">
-                    <article class="card course">
-                        <span>MAT-201</span>
-                        <h1 class="card-title">Calculus II</h1>
-                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
-                        <div class="course-grid">
-                            <div>
-                                <span>Current Grade</span>
-                                <h3>84%</h3>
-                            </div>
-                            <div>
-                                <span>Next deadline</span>
-                                <h3>Mon, 5 oct</h3>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="card course">
-                        <span>MAT-201</span>
-                        <h1 class="card-title">Calculus II</h1>
-                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
-                        <div class="course-grid">
-                            <div>
-                                <span>Current Grade</span>
-                                <h3>84%</h3>
-                            </div>
-                            <div>
-                                <span>Next deadline</span>
-                                <h3>Mon, 5 oct</h3>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="card course">
-                        <span>MAT-201</span>
-                        <h1 class="card-title">Calculus II</h1>
-                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
-                        <div class="course-grid">
-                            <div>
-                                <span>Current Grade</span>
-                                <h3>84%</h3>
-                            </div>
-                            <div>
-                                <span>Next deadline</span>
-                                <h3>Mon, 5 oct</h3>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="card course">
-                        <span>MAT-201</span>
-                        <h1 class="card-title">Calculus II</h1>
-                        <div class="progress-bar"><div style="background-color: var(--blue); width: 85%; height: 100%;"></div></div>
-                        <div class="course-grid">
-                            <div>
-                                <span>Current Grade</span>
-                                <h3>84%</h3>
-                            </div>
-                            <div>
-                                <span>Next deadline</span>
-                                <h3>Mon, 5 oct</h3>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                <div class="courses" id="dash-courses"></div>
             </main>
         </div>
     </div>

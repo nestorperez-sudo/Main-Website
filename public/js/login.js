@@ -24,10 +24,10 @@ signinModeButton.addEventListener("click", () => {
     showSignup(false);
 });
 
-/* Sign in (prototype): validates the fields, then opens the dashboard. */
+/* Sign in (prototype): the brief does not require authentication, so after the
+   browser checks the fields it simply opens the dashboard. */
 signinSection.addEventListener("submit", (event) => {
     event.preventDefault();
-    // BACKEND: send the credentials to the auth endpoint and redirect only on success.
     window.location.href = "index.html";
 });
 
@@ -49,16 +49,33 @@ function validatePasswordMatch() {
 signupPassword.addEventListener("input", validatePasswordMatch);
 confirmPassword.addEventListener("input", validatePasswordMatch);
 
-signupForm.addEventListener("submit", (event) => {
+/* Sign up: POST /api/users. Only name and email are sent; passwords are not
+   stored because the brief does not require authentication. */
+signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    clearFormErrors(signupForm);
     validatePasswordMatch();
 
+    // Client-side check first: the browser shows its message on the first invalid field.
     if (!signupForm.reportValidity()) {
         return;
     }
 
-    // BACKEND: create the account here instead of showing the prototype notice.
-    signupStatus.hidden = false;
+    const submitButton = signupForm.querySelector("[type='submit']");
+    submitButton.disabled = true;
+    try {
+        const user = await apiRequest("POST", "/users", {
+            name: signupForm.elements.name.value,
+            email: signupForm.elements.email.value
+        });
+        signupForm.reset();
+        signupStatus.textContent = `Account created for ${user.name}. You can now sign in.`;
+        signupStatus.hidden = false;
+    } catch (error) {
+        showSaveError(signupForm, error); // 400 messages appear under each field
+    } finally {
+        submitButton.disabled = false;
+    }
 });
 
 signupForm.addEventListener("input", () => {

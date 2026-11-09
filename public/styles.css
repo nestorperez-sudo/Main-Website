@@ -3445,13 +3445,13 @@ button.add-course-card {
     font-weight: 400;
 }
 
-/* Grades in the course detail dialog */
-.grade-list {
+/* Lists with edit/delete (grades, study sessions) and their inline forms */
+.entry-list {
     display: grid;
     margin: 0;
 }
 
-.grade-item {
+.entry-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     align-items: center;
@@ -3460,35 +3460,35 @@ button.add-course-card {
     border-bottom: 1px solid var(--line);
 }
 
-.grade-item div:first-child {
+.entry-item div:first-child {
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
 
-.grade-item div:first-child span {
+.entry-item div:first-child span {
     color: var(--gray);
     font-size: .7rem;
 }
 
-.grade-score {
+.entry-value {
     font-size: 1rem;
     font-weight: 600;
 }
 
-.grade-form {
+.inline-form {
     display: grid;
     gap: 10px;
     padding: 12px;
     background-color: var(--cream);
 }
 
-.grade-form h4 {
+.inline-form h4 {
     font-size: .8rem;
 }
 
-.grade-form .form-field input,
-.grade-form .form-field select {
+.inline-form .form-field input,
+.inline-form .form-field select {
     background-color: var(--white);
 }
 
@@ -3537,15 +3537,109 @@ button.add-course-card {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .grade-item {
+    .entry-item {
         grid-template-columns: minmax(0, 1fr) auto;
     }
 
-    .grade-item .course-card-actions {
+    .entry-item .course-card-actions {
         grid-column: 1 / -1;
     }
 
     .filter-search {
         max-width: none;
+    }
+}
+
+/* Course colour on dashboard and schedule pieces ("has-color" + a color-* class) */
+.course.has-color {
+    border-top-color: var(--course-color);
+}
+
+.priority-indicator.has-color {
+    background-color: var(--course-color);
+}
+
+.card-slot-time.has-color {
+    border-left: 3px solid var(--course-color);
+    background-color: var(--course-background);
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--course-color, var(--gold));
+}
+
+.agenda-item {
+    --event-color: var(--gold);
+    --event-background: var(--cream);
+}
+
+.agenda-item.has-color {
+    --event-color: var(--course-color);
+    --event-background: var(--course-background);
+}
+
+.agenda-item.with-actions {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+}
+
+.agenda-empty {
+    color: var(--gray);
+}
+
+.dash-empty {
+    padding: 8px 0;
+    color: var(--gray);
+}
+
+/* Schedule: clickable calendar days */
+.month-day-button {
+    width: 100%;
+    height: 100%;
+    min-height: 42px;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+.month-day-button:hover {
+    background-color: var(--blue-soft);
+    box-shadow: none;
+    filter: none;
+    transform: none;
+}
+
+.month-days .selected-day .month-day-button:hover {
+    background-color: transparent;
+}
+
+.month-day-button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: -2px;
+}
+
+.schedule-heading .courses-add-button {
+    align-self: center;
+}
+
+/* Statistics: study sessions card */
+.sessions-card {
+    gap: 12px;
+}
+
+/* Settings: save message next to the buttons */
+.settings-save-text {
+    flex: 1 1 260px;
+    flex-direction: column;
+}
+
+@media (max-width: 462px) {
+    .agenda-item.with-actions {
+        grid-template-columns: 44px minmax(0, 1fr);
+    }
+
+    .agenda-item.with-actions .course-card-actions {
+        grid-column: 2;
     }
 }

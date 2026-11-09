@@ -403,3 +403,19 @@ a {
         margin-left: 0;
     }
 }
+/* Errors returned by the API, shown under each sign-up field */
+.entity-form .field-error,
+.entity-form .form-error {
+    color: var(--red);
+    font-size: .75rem;
+    font-weight: 500;
+}
+
+.entity-form .field-error:empty,
+.entity-form .form-error:empty {
+    display: none;
+}
+
+.entity-form [aria-invalid="true"] {
+    border-color: var(--red);
+}

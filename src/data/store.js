@@ -6,8 +6,17 @@
  * later be rewritten to talk to a real database without changing anything else.
  *
  * Data lives in RAM: restarting the server resets it to the seed data below.
- * Seed dates are around the week of Monday 9 November 2026.
  */
+
+// Seed dates are relative to the day the server starts, so the dashboard and
+// the schedule always have something to show: day(0) is today, day(1) tomorrow,
+// day(-3) three days ago. Returns "YYYY-MM-DD".
+function day(offset) {
+    const date = new Date();
+    date.setDate(date.getDate() + offset);
+    const pad = (number) => String(number).padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
 
 const data = {
     courses: [
@@ -20,38 +29,37 @@ const data = {
     ],
 
     tasks: [
-        { id: 1, title: "Physics II lab report", courseId: 3, type: "assignment", priority: "high", dueDate: "2026-11-09", dueTime: "23:59", reminder: "1-day", description: "Write up the pendulum experiment.", completed: false },
-        { id: 2, title: "Review calculus chapters 4–5", courseId: 1, type: "study", priority: "high", dueDate: "2026-11-10", dueTime: null, reminder: "none", description: null, completed: false },
-        { id: 3, title: "Microeconomics quiz", courseId: 4, type: "quiz", priority: "medium", dueDate: "2026-11-13", dueTime: "15:00", reminder: "3-days", description: null, completed: false },
-        { id: 4, title: "Calculus II problem set", courseId: 1, type: "assignment", priority: "medium", dueDate: "2026-11-16", dueTime: "23:59", reminder: "1-day", description: "Problem set 4, exercises 1–12.", completed: false },
-        { id: 5, title: "Data Structures milestone 1", courseId: 2, type: "project", priority: "high", dueDate: "2026-11-18", dueTime: null, reminder: "1-week", description: null, completed: false },
-        { id: 6, title: "Review lecture notes", courseId: 1, type: "study", priority: "low", dueDate: "2026-11-06", dueTime: null, reminder: "none", description: null, completed: true },
-        { id: 7, title: "Read chapter 3", courseId: 4, type: "reading", priority: "low", dueDate: "2026-11-05", dueTime: null, reminder: "none", description: null, completed: true }
+        { id: 1, title: "Physics II lab report", courseId: 3, type: "assignment", priority: "high", dueDate: day(0), dueTime: "23:59", reminder: "1-day", description: "Write up the pendulum experiment.", completed: false },
+        { id: 2, title: "Review calculus chapters 4–5", courseId: 1, type: "study", priority: "high", dueDate: day(1), dueTime: null, reminder: "none", description: null, completed: false },
+        { id: 3, title: "Microeconomics quiz", courseId: 4, type: "quiz", priority: "medium", dueDate: day(3), dueTime: "15:00", reminder: "3-days", description: null, completed: false },
+        { id: 4, title: "Calculus II problem set", courseId: 1, type: "assignment", priority: "medium", dueDate: day(6), dueTime: "23:59", reminder: "1-day", description: "Problem set 4, exercises 1–12.", completed: false },
+        { id: 5, title: "Data Structures milestone 1", courseId: 2, type: "project", priority: "high", dueDate: day(8), dueTime: null, reminder: "1-week", description: null, completed: false },
+        { id: 6, title: "Review lecture notes", courseId: 1, type: "study", priority: "low", dueDate: day(-3), dueTime: null, reminder: "none", description: null, completed: true },
+        { id: 7, title: "Read chapter 3", courseId: 4, type: "reading", priority: "low", dueDate: day(-4), dueTime: null, reminder: "none", description: null, completed: true }
     ],
 
     events: [
-        { id: 1, title: "Calculus II lecture", type: "class", date: "2026-11-09", startTime: "09:00", endTime: "11:00", location: "Room 204", courseId: 1 },
-        { id: 2, title: "Calculus II study session", type: "study", date: "2026-11-09", startTime: "11:30", endTime: "13:00", location: "Library, Study Room 3", courseId: 1 },
-        { id: 3, title: "Physics II lab", type: "class", date: "2026-11-09", startTime: "14:00", endTime: "16:00", location: "Lab 2, Science Building", courseId: 3 },
-        { id: 4, title: "Physics II lecture", type: "class", date: "2026-11-10", startTime: "10:00", endTime: "12:00", location: "Science Hall, Room 204", courseId: 3 },
-        { id: 5, title: "Microeconomics quiz", type: "exam", date: "2026-11-13", startTime: "15:00", endTime: "16:00", location: "Room 108", courseId: 4 },
-        { id: 6, title: "Calculus II problem set due", type: "deadline", date: "2026-11-16", startTime: "23:59", endTime: null, location: null, courseId: 1 },
-        { id: 7, title: "Calculus II midterm", type: "exam", date: "2026-11-18", startTime: "09:00", endTime: "11:00", location: "Lecture Hall", courseId: 1 }
+        { id: 1, title: "Calculus II lecture", type: "class", date: day(0), startTime: "09:00", endTime: "11:00", location: "Room 204", courseId: 1 },
+        { id: 2, title: "Calculus II study session", type: "study", date: day(0), startTime: "11:30", endTime: "13:00", location: "Library, Study Room 3", courseId: 1 },
+        { id: 3, title: "Physics II lab", type: "class", date: day(0), startTime: "14:00", endTime: "16:00", location: "Lab 2, Science Building", courseId: 3 },
+        { id: 4, title: "Physics II lecture", type: "class", date: day(1), startTime: "10:00", endTime: "12:00", location: "Science Hall, Room 204", courseId: 3 },
+        { id: 5, title: "Microeconomics quiz", type: "exam", date: day(3), startTime: "15:00", endTime: "16:00", location: "Room 108", courseId: 4 },
+        { id: 6, title: "Calculus II problem set due", type: "deadline", date: day(6), startTime: "23:59", endTime: null, location: null, courseId: 1 },
+        { id: 7, title: "Calculus II midterm", type: "exam", date: day(8), startTime: "09:00", endTime: "11:00", location: "Lecture Hall", courseId: 1 }
     ],
 
-    // Done sessions add up to the statistics page: 9 h this week
-    // (Calculus 3.5 h, Physics 2.5 h, Data Structures 2 h, Microeconomics 1 h).
+    // Done sessions (9 h in total) are in the last few days; planned ones are ahead.
     studySessions: [
-        { id: 1, courseId: 1, date: "2026-11-09", minutes: 90, done: true, notes: "Chapter 4 exercises" },
-        { id: 2, courseId: 3, date: "2026-11-09", minutes: 60, done: true, notes: null },
-        { id: 3, courseId: 2, date: "2026-11-10", minutes: 120, done: true, notes: "Linked lists" },
-        { id: 4, courseId: 1, date: "2026-11-10", minutes: 60, done: true, notes: null },
-        { id: 5, courseId: 3, date: "2026-11-11", minutes: 90, done: true, notes: "Lab report draft" },
-        { id: 6, courseId: 1, date: "2026-11-12", minutes: 60, done: true, notes: null },
-        { id: 7, courseId: 4, date: "2026-11-12", minutes: 60, done: true, notes: "Quiz revision" },
-        { id: 8, courseId: 1, date: "2026-11-14", minutes: 90, done: false, notes: "Midterm practice exam" },
-        { id: 9, courseId: 1, date: "2026-11-16", minutes: 60, done: false, notes: "Midterm review" },
-        { id: 10, courseId: 1, date: "2026-11-17", minutes: 60, done: false, notes: "Midterm final review" }
+        { id: 1, courseId: 1, date: day(0), minutes: 90, done: true, notes: "Chapter 4 exercises" },
+        { id: 2, courseId: 3, date: day(0), minutes: 60, done: true, notes: null },
+        { id: 3, courseId: 2, date: day(-1), minutes: 120, done: true, notes: "Linked lists" },
+        { id: 4, courseId: 1, date: day(-1), minutes: 60, done: true, notes: null },
+        { id: 5, courseId: 3, date: day(-2), minutes: 90, done: true, notes: "Lab report draft" },
+        { id: 6, courseId: 1, date: day(-3), minutes: 60, done: true, notes: null },
+        { id: 7, courseId: 4, date: day(-3), minutes: 60, done: true, notes: "Quiz revision" },
+        { id: 8, courseId: 1, date: day(2), minutes: 90, done: false, notes: "Midterm practice exam" },
+        { id: 9, courseId: 1, date: day(5), minutes: 60, done: false, notes: "Midterm review" },
+        { id: 10, courseId: 1, date: day(7), minutes: 60, done: false, notes: "Midterm final review" }
     ],
 
     grades: [

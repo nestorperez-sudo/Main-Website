@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="js/main.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/statistics.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -80,6 +83,7 @@
                         <a href="statistics.html?p=semester">Semester</a>
                     </nav>
                 </div>
+                <p class="list-status" id="statistics-status" role="status" hidden></p>
 
                 <section class="statistics-kpis" aria-label="Weekly overview">
                     <article class="card stat-kpi">
@@ -87,16 +91,16 @@
                             <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-clock"></i></span>
                             <span class="stat-kpi-label">Studied this week</span>
                         </div>
-                        <p class="stat-kpi-value">9 <span>hours</span></p>
-                        <p class="stat-kpi-change positive">1.5 h more than last week</p>
+                        <p class="stat-kpi-value" id="kpi-hours">0 <span>hours</span></p>
+                        <p class="stat-kpi-change" id="kpi-hours-note"></p>
                     </article>
                     <article class="card stat-kpi">
                         <div class="stat-kpi-top">
                             <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
                             <span class="stat-kpi-label">Tasks completed</span>
                         </div>
-                        <p class="stat-kpi-value">7 <span>of 11</span></p>
-                        <p class="stat-kpi-change">64% complete this week</p>
+                        <p class="stat-kpi-value" id="kpi-tasks">0 <span>of 0</span></p>
+                        <p class="stat-kpi-change" id="kpi-tasks-note"></p>
                     </article>
                     <article class="card stat-kpi">
                         <div class="stat-kpi-top">
@@ -111,8 +115,8 @@
                             <span class="stat-kpi-icon" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
                             <span class="stat-kpi-label">Average focus session</span>
                         </div>
-                        <p class="stat-kpi-value">38 <span>min</span></p>
-                        <p class="stat-kpi-change negative">4 min shorter than last week</p>
+                        <p class="stat-kpi-value" id="kpi-focus">0 <span>min</span></p>
+                        <p class="stat-kpi-change" id="kpi-focus-note"></p>
                     </article>
                 </section>
 
@@ -125,101 +129,76 @@
                         <div class="weekly-goal">
                             <div class="weekly-goal-label">
                                 <span>Weekly goal</span>
-                                <strong>9 <span>/ 15 h</span></strong>
+                                <strong id="goal-label">0 <span>/ 0 h</span></strong>
                             </div>
-                            <div class="goal-progress" role="img" aria-label="9 of 15 study hours completed, 60 percent">
-                                <span></span>
-                            </div>
-                        </div>
-                        <div class="study-chart" role="img" aria-label="Study hours by day: Monday 2.5, Tuesday 3, Wednesday 1.5, Thursday 2, Friday 0, Saturday 0, Sunday 0 hours.">
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">2.5 h</span>
-                                <div class="study-chart-track">
-                                    <div class="study-chart-stack" style="height: 62.5%;">
-                                        <span class="course-calc" style="flex-grow: 1;"></span>
-                                        <span class="course-data" style="flex-grow: 1;"></span>
-                                        <span class="course-physics" style="flex-grow: .5;"></span>
-                                    </div>
-                                </div>
-                                <span class="study-chart-day">Mon</span>
-                            </div>
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">3 h</span>
-                                <div class="study-chart-track">
-                                    <div class="study-chart-stack" style="height: 75%;">
-                                        <span class="course-calc" style="flex-grow: 1;"></span>
-                                        <span class="course-data" style="flex-grow: .5;"></span>
-                                        <span class="course-physics" style="flex-grow: 1;"></span>
-                                        <span class="course-economics" style="flex-grow: .5;"></span>
-                                    </div>
-                                </div>
-                                <span class="study-chart-day">Tue</span>
-                            </div>
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">1.5 h</span>
-                                <div class="study-chart-track">
-                                    <div class="study-chart-stack" style="height: 37.5%;">
-                                        <span class="course-calc" style="flex-grow: .5;"></span>
-                                        <span class="course-data" style="flex-grow: .5;"></span>
-                                        <span class="course-economics" style="flex-grow: .5;"></span>
-                                    </div>
-                                </div>
-                                <span class="study-chart-day">Wed</span>
-                            </div>
-                            <div class="study-chart-column is-today">
-                                <span class="study-chart-value">2 h</span>
-                                <div class="study-chart-track">
-                                    <div class="study-chart-stack" style="height: 50%;">
-                                        <span class="course-physics" style="flex-grow: 1;"></span>
-                                        <span class="course-calc" style="flex-grow: 1;"></span>
-                                    </div>
-                                </div>
-                                <span class="study-chart-day">Thu</span>
-                            </div>
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">0 h</span>
-                                <div class="study-chart-track"></div>
-                                <span class="study-chart-day">Fri</span>
-                            </div>
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">0 h</span>
-                                <div class="study-chart-track"></div>
-                                <span class="study-chart-day">Sat</span>
-                            </div>
-                            <div class="study-chart-column">
-                                <span class="study-chart-value">0 h</span>
-                                <div class="study-chart-track"></div>
-                                <span class="study-chart-day">Sun</span>
+                            <div class="goal-progress" id="goal-progress" role="img" aria-label="Weekly goal progress">
+                                <span id="goal-progress-fill" style="width: 0%;"></span>
                             </div>
                         </div>
-                        <ul class="statistics-legend" aria-label="Courses">
-                            <li><span class="legend-dot course-calc"></span>Calculus II</li>
-                            <li><span class="legend-dot course-data"></span>Data Structures</li>
-                            <li><span class="legend-dot course-physics"></span>Physics II</li>
-                            <li><span class="legend-dot course-economics"></span>Microeconomics</li>
-                        </ul>
+                        <div class="study-chart" id="study-chart" role="img" aria-label="Study hours by day"></div>
+                        <ul class="statistics-legend" id="study-legend" aria-label="Courses"></ul>
                     </article>
 
                     <article class="card statistics-card">
                         <div class="card-header">
                             <h2 class="card-title">Time by course</h2>
-                            <span class="count">9 hours total</span>
+                            <span class="count" id="course-time-total"></span>
                         </div>
                         <div class="course-time-content">
-                            <div class="course-time-chart" role="img" aria-label="Study time by course: Calculus II 3.5 hours, Physics II 2.5 hours, Data Structures 2 hours, Microeconomics 1 hour.">
+                            <div class="course-time-chart" id="course-time-chart" role="img" aria-label="Study time by course">
                                 <div class="course-time-chart-center">
-                                    <strong>9 h</strong>
+                                    <strong id="course-time-center">0 h</strong>
                                     <span>this week</span>
                                 </div>
                             </div>
-                            <ul class="course-time-list">
-                                <li><span class="legend-dot course-calc"></span><span>Calculus II</span><strong>3.5 h</strong></li>
-                                <li><span class="legend-dot course-physics"></span><span>Physics II</span><strong>2.5 h</strong></li>
-                                <li><span class="legend-dot course-data"></span><span>Data Structures</span><strong>2 h</strong></li>
-                                <li><span class="legend-dot course-economics"></span><span>Microeconomics</span><strong>1 h</strong></li>
-                            </ul>
+                            <ul class="course-time-list" id="course-time-list"></ul>
                         </div>
                     </article>
+                </section>
+                <section class="card statistics-card sessions-card" aria-labelledby="sessions-title">
+                    <div class="card-header">
+                        <h2 class="card-title" id="sessions-title">Study sessions</h2>
+                        <span class="count" id="sessions-count"></span>
+                    </div>
+                    <p class="list-status" id="sessions-status" role="status" hidden></p>
+                    <ul class="entry-list" id="session-list" aria-live="polite"></ul>
+                    <form class="inline-form entity-form" id="session-form" novalidate>
+                        <h4 id="session-form-title">Log a study session</h4>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="session-course">Course</label>
+                                <select id="session-course" name="courseId" required>
+                                    <option value="">Loading courses…</option>
+                                </select>
+                                <p class="field-error" data-error-for="courseId"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="session-date">Date</label>
+                                <input id="session-date" name="date" type="date" required>
+                                <p class="field-error" data-error-for="date"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="session-minutes">Minutes</label>
+                                <input id="session-minutes" name="minutes" type="number" required min="5" max="600" step="1" value="60">
+                                <p class="field-error" data-error-for="minutes"></p>
+                            </div>
+                            <div class="form-field">
+                                <label for="session-notes">Notes <span>(optional)</span></label>
+                                <input id="session-notes" name="notes" type="text" maxlength="200" placeholder="Chapter 4 exercises">
+                                <p class="field-error" data-error-for="notes"></p>
+                            </div>
+                            <div class="form-field form-check">
+                                <input id="session-done" name="done" type="checkbox">
+                                <label for="session-done">Done (leave unticked for a planned session)</label>
+                                <p class="field-error" data-error-for="done"></p>
+                            </div>
+                        </div>
+                        <p class="form-error" role="alert"></p>
+                        <div class="popup-btns">
+                            <button type="button" class="reset-btn" id="session-cancel-edit" hidden>Cancel edit</button>
+                            <button type="submit">Save session</button>
+                        </div>
+                    </form>
                 </section>
 
                 <section class="statistics-grid" aria-label="Grades and recommendations">

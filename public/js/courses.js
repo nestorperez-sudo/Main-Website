@@ -363,7 +363,7 @@ function renderCourseDetails() {
 
 function createGradeItem(grade) {
     const item = document.createElement("li");
-    item.className = "grade-item";
+    item.className = "entry-item";
 
     const info = document.createElement("div");
     const title = document.createElement("strong");
@@ -373,7 +373,7 @@ function createGradeItem(grade) {
     info.append(title, meta);
 
     const score = document.createElement("span");
-    score.className = "grade-score";
+    score.className = "entry-value";
     score.textContent = `${grade.score}%`;
 
     const actions = document.createElement("div");
